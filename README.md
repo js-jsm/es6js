@@ -7,13 +7,16 @@
 - 각자 2-3주에 한번꼴로 스스로 공부하고 이해한 내용을 리뷰
 - 토의와 테스트를 통해 내용 보충
 
+### 구성원
+재남, 재필, 명기, 태산, 창규, 지혜, 봉주, 희경, 봉재
+
 ### Role
 
 | in charge | chapter | description
 | :-: | --- | ---
 | 지혜1 | 01 블록변수와 블록스코프 및 함수 | let, const, Block Scope, Block Scoped Function
 | 희경1 | 02 화살표함수                    | Arrow Function
-| 재남1 | 03 다중 변수 및 인자 다루기      | Destructuring, Spread Operator, Rest Parameter
+| 재남1 | 03 다중 변수 및 인자 제어        | Destructuring, Spread Operator, Rest Parameter, Default Parameter
 | 봉재1 | 04 문자열과 템플릿리터럴         | String, Template Literal
 |       | 05 객체                          | Object
 |       | 06 컬렉션                        | Map, Set, WeakMap, WeakSet
