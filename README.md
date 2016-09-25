@@ -2,64 +2,61 @@
 
 `ECMAScript2015`를 학습하는 스터디입니다.
 
+
 ## 목차
 
 - [01 블록변수와 블록스코프 및 함수](/01%20블록변수와%20블록스코프%20및%20함수)
+  + let `지혜 in progress`
+  + const
+  + Block Scope
+  + Block Scoped Function
 - [02 화살표함수](/02%20화살표함수)
+  + Arrow Function `희경 in progress`
 - [03 다중 변수 및 인자 제어](/03%20다중%20변수%20및%20인자%20제어)
+  + Default Parameter
+  + Rest Parameter
+  + Spread Operator
+  + Destructuring `재남 in progress`
 - [04 문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴)
+  + String `봉재 in progress`
+  + Template Literal &amp; Tagged Template
+  + Unicode
 - [05 객체](/05%20객체)
+  + Object
 - [06 컬렉션](/06%20컬렉션)
+  + Map
+  + Set
+  + WeakMap
+  + WeakSet
 - [07 심볼](/07%20심볼)
+  + Symbol `태산 in progress`
 - [08 숫자와 수학](/08%20숫자와%20수학)
+  + Binary Literal &amp; Octal Literal `창규 in progress`
+  + Number
+  + Math
 - [09 배열](/09%20배열)
+  + Array `재필 in progress`
 - [10 형지정 배열](/10%20형지정%20배열)
+  + typed array
 - [11 모듈](/11%20모듈)
+  + Module `명기 in progress`
 - [12 클래스](/12%20클래스)
-- [13 이터러블](/13%20이터러블)
+  + Class
+- [13 이터러블과 이터레이터](/13%20이터러블과%20이터레이터)
+  + for of
+  + iterable
+  + iterator
 - [14 제너레이터](/14%20제너레이터)
+  + generator
+  + yield
 - [15 프라미스](/15%20프라미스)
+  + promise
 - [16 프록시](/16%20프록시)
+  + proxy
 - [17 리플렉션](/17%20리플렉션)
+  + relection
 - [18 정규표현식](/18%20정규표현식)
-
-
-### 스터디 진행방식
-
-- 각자 2-3주에 한번꼴로 스스로 공부하고 이해한 내용을 리뷰
-- 토의와 테스트를 통해 내용 보충
-
-### 구성원
-
-재남, 재필, 명기, 태산, 창규, 지혜, 봉주, 희경, 봉재
-
-### Role
-
-| in charge | chapter | description
-| :-: | --- | ---
-| 지혜1 | 01 블록변수와 블록스코프 및 함수 | let, const, Block Scope, Block Scoped Function
-| 희경1 | 02 화살표함수                    | Arrow Function
-| 재남1 | 03 다중 변수 및 인자 제어        | Destructuring, Spread Operator, Rest Parameter, Default Parameter
-| 봉재1 | 04 문자열과 템플릿리터럴         | String, Template Literal
-|       | 05 객체                          | Object
-|       | 06 컬렉션                        | Map, Set, WeakMap, WeakSet
-| 태산1 | 07 심볼                          | Symbol
-| 창규1 | 08 숫자와 수학                   | Number, Math
-| 재필1 | 09 배열                          | Array
-|       | 10 형지정 배열                   | typed array
-| 명기1 | 11 모듈                          | Module
-|       | 12 클래스                        | Class
-|       | 13 이터러블                      | for of, iterable, iterator
-|       | 14 제너레이터                    | generator
-|       | 15 프라미스                      | promise
-|       | 16 프록시                        | proxy
-|       | 17 리플렉션                      | relection
-|       | 18 정규표현식                    | regular expressions
-
-
-### 일정
-
-- 일요일 오후 2시 - 5시
+  + regular expressions
 
 
 ### 참고자료

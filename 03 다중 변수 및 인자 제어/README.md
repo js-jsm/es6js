@@ -2,11 +2,17 @@
 
 # CH 3. 다중 변수 및 인자 제어
 
-## 3-1. Destructuring Assignment 해체 할당
+## 3-1. Default Parameter
+
+## 3-2. Rest Parameter
+
+## 3-3. Spread Operator
+
+## 3-4. Destructuring Assignment 해체 할당
 
 해체할당은 객체나 배열의 값들을 전부 해체하여 필요로 하는 값들만 축출, 새로운 변수에 할당하는 표현식이다. ES6에 새롭게 추가된 기능들 중에서도 가장 활용도가 높은 기능 중 하나이다.
 
-### 3-1-1. 배열 해체 할당
+### 3-4-1. 배열 해체 할당
 
 명칭은 '배열' 해체할당이지만, 이터러블하기만 하면 어떤 객체이든 동일한 방법으로 해체할 수 있다.
 
@@ -95,7 +101,7 @@ console.log(a, b);   // 2 1
 ```
 
 
-### 3-1-2. 객체 해체 할당
+### 3-4-2. 객체 해체 할당
 
 객체의 경우 프로퍼티를 지정하여 새로 지정할 변수를 할당하는 식으로 해체할당이 이루어진다. 그외의 동작은 배열과 동일하나, 초반에는 `:`의 좌우측에 어떤 값이 와야 하는지가 헷갈리기 쉬우므로 주의를 요한다. 일단 예제를 살펴보자.
 
@@ -177,7 +183,7 @@ console.log(albums);  // ReferenceError: albums is not defined
 ```
 
 
-### 3-1-3. 사용예
+### 3-4-3. 사용예
 
 ##### 1) 서버에서 넘겨받은 json 데이터에서 원하는 데이터들만 바로 추출
 
@@ -233,12 +239,5 @@ console.log(getArea({width: 10, height: 50}));    // 500
 const getRange = ({min=1, max=10}) => Math.abs(max - min);
 console.log(getRange({}));         // 9
 console.log(getRange({max: 20}));  // 19
-console.log(getRange({min: 5}));   // 5
+console.log(getRange({min: 3}));   // 7
 ```
-
-
-## 3-2. Spread Operator
-
-## 3-3. Rest Parameter
-
-## 3-4. Default Parameter
