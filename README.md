@@ -26,7 +26,7 @@
   + Unicode
 
 ### 05 [객체](/05%20객체)
-  + Object
+  + Object `병주 in progress`
 
 ### 06 [컬렉션](/06%20컬렉션)
   + Map
@@ -55,7 +55,7 @@
   + Class
 
 ### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터)
-  + for of
+  + for of `제인 in progress`
   + iterable
   + iterator
 
