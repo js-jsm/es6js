@@ -1,6 +1,4 @@
-| 재남1 | 03 다중 변수 및 인자 제어        | Destructuring, Spread Operator, Rest Parameter, Default Parameter
-
-# CH 3. 다중 변수 및 인자 제어
+# CH 3. 다중 변수 및 인자 제어 - `by 재남`
 
 ## 3-1. [Default Parameter](./3-1_Default%20Parameter.md)
 
