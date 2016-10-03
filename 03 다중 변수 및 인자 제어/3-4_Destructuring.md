@@ -8,8 +8,7 @@
 
 명칭은 '배열' 해체할당이지만, 이터러블하기만 하면 어떤 객체이든 동일한 방법으로 해체할 수 있다.
 
-
-##### 1) 기본 사용법
+#### 1) 기본 사용법
 
 ES5 이하에서는 배열에 할당되어 있던 값들을 추출하여 새로운 변수에 할당하기 위해서는 다음과 같이 했었다.
 
@@ -30,7 +29,7 @@ const [ a, b, c ] = arr;
 위 구문은 우변의 arr을 해체하여 좌변의 같은 인덱스값을 가진 변수에 각각 할당한다. 즉 `const a = 5, b = 6, c = 7` 이 되는 것이다.
 
 
-##### 2) 발췌 할당
+#### 2) 발췌 할당
 
 필요한 인스턴스만 발췌하여 할당할 수도 있다. 인덱스가 매칭된다는 사실을 염두에 두고 다음 예제들을 살펴보자.
 
@@ -41,7 +40,7 @@ const [ a, b, c, d ] = [ 1, 2, 3 ];  // a = 1, b = 2, c = 3, d = undefined
 ```
 
 
-##### 3) rest parameter와의 연동
+#### 3) rest parameter와의 연동
 
 좌변 내에 rest parameter를 조합하면 간단한 mapping도 가능하다.
 
@@ -51,7 +50,7 @@ const [ , , ...a ] = [ 1, 2, 3, 4, 5];  // a = [ 3, 4, 5]
 ```
 
 
-##### 4) default parameter와의 연동
+#### 4) default parameter와의 연동
 
 좌변 내에 default parameter를 조합할 경우에는 어떻게 되는지 살펴보자.
 
@@ -62,8 +61,7 @@ const [a = b, b] = [undefined, 10];       // ReferenceError: b is not defined
 ```
 
 
-
-##### 5) 다차원 배열의 해체할당
+#### 5) 다차원 배열의 해체할당
 
 다차원 배열 역시 좌변의 형태를 우변과 동일하게 맞춰놓으면 해체할당이 가능하다.
 
@@ -72,7 +70,7 @@ const [a, [b, [ , c], ], d] = [1, [2, [3, 4], 5], 6];
   // a = 1, b = 2, c = 4, d = 6
 ```
 
-##### 6) 서로 바꾸기
+#### 6) 서로 바꾸기
 
 기존에는 변수끼리 값을 교환하기 위해서는 임시변수가 하나 더 필요했다.
 
@@ -123,11 +121,11 @@ const { name, age, gender } = iu;  // name = '아이유', age = 23, gender = 'fe
 ```
 
 
-##### 1) `{ [할당할 프로퍼티명] : [새로 선언할 변수명] }`
+#### 1) `{ [할당할 프로퍼티명] : [새로 선언할 변수명] }`
 
-##### 2) 변수명을 생략할 경우 프로퍼티명과 동일한 이름의 변수가 생성된다.
+#### 2) 변수명을 생략할 경우 프로퍼티명과 동일한 이름의 변수가 생성된다.
 
-##### 3) 프로퍼티를 지정하지 않은 경우는 할당 없이 건너뛴다.
+#### 3) 프로퍼티를 지정하지 않은 경우는 할당 없이 건너뛴다.
 
 즉, 관심있는 프로퍼티만 언급하면 언급한 프로퍼티들에 대해서만 변수가 생성되며 나머지는 무시된다.
 
@@ -135,7 +133,7 @@ const { name, age, gender } = iu;  // name = '아이유', age = 23, gender = 'fe
 const { name, gender } = iu;    // name = '아이유', gender = 'female'
 ```
 
-##### 4) default parameter와의 연동
+#### 4) default parameter와의 연동
 
 ```js
 const phone = {
@@ -156,7 +154,7 @@ const {
 } = phone;    // name = 'iphone', version = '6s', color = 'white'
 ```
 
-##### 5) 중첩 객체의 해체할당
+#### 5) 중첩 객체의 해체할당
 
 중첩객체도 원본객체와 동일한 구조로 표현하면 간단히 해체 및 할당을 할 수 있다.
 주의할 점은, 하위 객체를 해체할 경우 그 상위의 프로퍼티는 값이 할당되지 않는다는 점이다.
@@ -194,7 +192,7 @@ console.log(albums);    // ReferenceError: albums is not defined
 
 ### 3-4-3. 사용예
 
-##### 1) 서버에서 넘겨받은 json 데이터에서 원하는 데이터들만 바로 추출
+#### 1) 서버에서 넘겨받은 json 데이터에서 원하는 데이터들만 바로 추출
 
 ```js
 const deliveryProduct = {
@@ -223,7 +221,7 @@ products.forEach(({name, price, quantity}) => {
 
 위 예제는 임의의 mock데이터를 구성하여 바로 해체할당하였지만, ajax 호출 등으로 서버와 연동하여 전송받은 데이터의 경우에도 위와 같은 형식으로 손쉽게 원하는 데이터만 추출할 수 있을 것이다.
 
-##### 2) 객체를 리턴하는 함수의 결과값 활용
+#### 2) 객체를 리턴하는 함수의 결과값 활용
 
 ```js
 const getUrlParts = (url) =>
@@ -233,7 +231,7 @@ const [ , protocol, host, , title] = parts;
 console.log(protocol, host, title);  // http  abc.com   7-1.destructuring
 ```
 
-##### 3) 함수 내부에서의 활용
+#### 3) 함수 내부에서의 활용
 
 ```js
 const getArea = (info) => {
@@ -243,7 +241,7 @@ const getArea = (info) => {
 console.log(getArea({width: 10, height: 50}));    // 500
 ```
 
-##### 4) 함수의 매개변수 정의 과정에서 해체할당
+#### 4) 함수의 매개변수 정의 과정에서 해체할당
 
 ```js
 const getArea = ({width, height}) => width * height;
