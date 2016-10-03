@@ -15,10 +15,10 @@
   + Arrow Function `희경 in progress`
 
 ### 03 [다중 변수 및 인자 제어](/03%20다중%20변수%20및%20인자%20제어)
-  + Default Parameter
-  + Rest Parameter
-  + Spread Operator
-  + Destructuring `재남 in progress`
+  1. [Default Parameter](./3-1_Default%20Parameter.md)
+  2. [Rest Parameter](./3-2_Rest%20Parameter.md)
+  3. [Spread Operator](./3-3_Spread%20Operator.md)
+  4. [Destructuring Assignment](./3-4_Destructuring.md) `재남 waiting for review`
 
 ### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴)
   + String `봉재 in progress`
