@@ -14,11 +14,11 @@
 ### 02 [화살표함수](/02%20화살표함수)
   + Arrow Function `희경 in progress`
 
-### 03 [다중 변수 및 인자 제어](/03%20다중%20변수%20및%20인자%20제어)
-  + Default Parameter
-  + Rest Parameter
-  + Spread Operator
-  + Destructuring `재남 in progress`
+### 03 [다중 변수 및 인자 제어](/03%20다중%20변수%20및%20인자%20제어) `재남 waiting for review`
+  1. [Default Parameter](./03%20다중%20변수%20및%20인자%20제어/3-1_Default%20Parameter.md)
+  2. [Rest Parameter](./03%20다중%20변수%20및%20인자%20제어/3-2_Rest%20Parameter.md)
+  3. [Spread Operator](./03%20다중%20변수%20및%20인자%20제어/3-3_Spread%20Operator.md)
+  4. [Destructuring Assignment](./03%20다중%20변수%20및%20인자%20제어/3-4_Destructuring.md)
 
 ### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴)
   + String `봉재 in progress`
@@ -38,7 +38,7 @@
   + Symbol `태산 in progress`
 
 ### 08 [숫자와 수학](/08%20숫자와%20수학)
-  + Binary Literal &amp; Octal Literal `창규 in progress`
+  + Binary Literal &amp; Octal Literal
   + Number
   + Math
 
@@ -52,7 +52,7 @@
   + Module `명기 in progress`
 
 ### 12 [클래스](/12%20클래스)
-  + Class
+  + Class `재남 in progress`
 
 ### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터)
   + for of `제인 in progress`
