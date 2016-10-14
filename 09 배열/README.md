@@ -2,8 +2,6 @@
 
 # 배열
 
-ES6에는 전역 배열 객체/인스턴스에 새로운 프로퍼티가 있어서 배열을 다루기 쉬워 졌다.
-
 ## Array.from(arrayLike|iterable[, mapFunc, context]) 메소드
 
 유사 배열 혹은 반복가능한 객체로부터 새 Array 인스턴스를 만든다.  
@@ -11,10 +9,14 @@ ES6에는 전역 배열 객체/인스턴스에 새로운 프로퍼티가 있어�
 - arrayLike : length 프로퍼티와 인덱스 처리된 엘리먼트를 지닌 객체.  
 - iterable :  매 호출시마다 한 개의 엘리먼트를 인출할 수 있는 객체.  
 - mapFunc : 배열의 모든 요소를 실행할 Map함수
-- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.
+- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.  
 
 ES6에서 클래스 구문은 내장 클래스 및 사용자 정의 클래스의 서브 클래스화를 허용한다.
-결과적으로 Array.from과 같은 클래스 정적 메소드는 Array가 아닌, Array의 서브 클래스를 상속받고 서브 클래스의 새 인스턴스를 만든다.
+Array.from과 같은 클래스 정적 메소드는 Array가 아닌, Array의 서브 클래스를 상속받고 서브 클래스의 새 인스턴스를 만든다.
+
+> *ES5에서는 Array.prototype.slice()를 사용했다.*  
+> var arr1 = Array.prototype.slice.call(arguments); // ES5  
+> const arr2 = Array.from(arguments); // ES6  
 
 > 유사 배열 객체 : (length 속성과 인덱싱된 요소를 가진 객체)  
 > 반복 가능한 객체 : (Map과 Set와 같이 객체의 요소를 얻을 수 있는 객체).
@@ -22,6 +24,7 @@ ES6에서 클래스 구문은 내장 클래스 및 사용자 정의 클래스의
 
 *예제*
 ```js
+
 // String
 Array.from("foo");
 // ["f", "o", "o"]
@@ -51,8 +54,10 @@ Array.from(s);
 var m = new Map([[1, 2], [2, 4], [4, 8]]);
 Array.from(m);
 // [[1, 2], [2, 4], [4, 8]]  
-//
 
+// iterable한 값일 경우 spread operator를 사용해 배열로 변환 할 수 있다.
+const arr1 = [...'abc']; // ["a", "b", "c"]
+const arr2 = [...new Set().add('a').add('b')]; // ["a", "b"]
 ```
 
 ## Array.of(element0[, element1[, ...[, elementN]]]) 메소드
@@ -61,7 +66,7 @@ Array.from(m);
 
 - elementN : 배열을 생성하는 요소
 
-Array 생성자함수는 숫자형 값 하나만 넘길 경우 제대로 동작하지 않는 문제(정수를 넘기면 배열의 length값을 할당하고, 소수를 넘기면 오류를 발생시킴)가 있기 때문에,
+배열 생성자함수 new Array()는 숫자형 값 하나만 넘길 경우 제대로 동작하지 않는 문제(정수를 넘기면 배열의 length값을 할당하고, 소수를 넘기면 오류를 발생시킴)가 있기 때문에,
 배열을 생성할 때는 늘 배열 리터럴로 선언할 필요가 있다.
 
 ```js
@@ -110,8 +115,6 @@ startIndex, endIndex 가 없을때 배열 전체를 채운다.
     - array : find 함수의 대상이 되는 배열.
 - thisArg : 선택적. 콜백이 호출될 때 this로 사용될 객체.
 
-
-
 ```js
 let x = 12;
 let arr = [11, 12, 13];
@@ -157,18 +160,14 @@ let result = arr.findIndex( function(value, index, array){
 }, x);
 console.log(result); // 1
 
-function isPrime(element, index, array) {
-  var start = 2;
-  while (start <= Math.sqrt(element)) {
-    if (element % start++ < 1) {
-      return false;
-    }
-  }
-  return element > 1;
-}
+// findIndex는 NaN을 찾을 수 있다.
+const arr2 = ['a', NaN];
+arr2.indexOf(NaN); // -1
+arr2.findIndex(x => Number.isNaN(x)); // 1
 
-console.log([4, 6, 8, 12].findIndex(isPrime)); // -1, not found
-console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
+// 새로생긴 Number.isNaN()은 NaN을 더 안전하게 판단 할 수 있다.
+isNaN('abc'); // true;
+Number.isNaN('abc') // false
 ```
 
 ## copyWithin(targetIndex[, startIndex, endIndex]) 메소드
@@ -177,7 +176,7 @@ console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
 배열 내 요소 startIndex부터 endIndex 만큼의 요소들을 복사하여 targetIndex 부터 차례로 치환한다.
 범위를 초과할 경우에는 가능한 영역(끝)까지만 치환한다
 
- - targetIndex : 복사한 원소가 들어갈 타깃 인덱스,
+ - targetIndex : 복사한 원소가 들어갈 위치의 인덱스,
  - startIndex : 복사를 시작할 인덱스,
  - endIndex : 복사가 끝나는 인덱스(전 까지)
 
@@ -194,18 +193,18 @@ console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
 [1, 2, 3, 4, 5].copyWithin(-2, -3, -1);
 // [1, 2, 3, 3, 4]
 
+// 유사배열 객체
 [].copyWithin.call({length: 5, 3: 1}, 0, 3);
 // {0: 1, 3: 1, length: 5}
 
-// ES6 Typed Arrays are subclasses of Array
-var i32a = new Int32Array([1, 2, 3, 4, 5]);
-
-i32a.copyWithin(0, 2);
-// Int32Array [3, 4, 5, 4, 5]
-
-// On platforms that are not yet ES6 compliant:
-[].copyWithin.call(new Int32Array([1, 2, 3, 4, 5]), 0, 3, 4);
-// Int32Array [4, 2, 3, 4, 5]
+// // 서브클래스로 만들어진 ES6 Typed Arrays
+// var i32a = new Int32Array([1, 2, 3, 4, 5]);
+//
+// i32a.copyWithin(0, 2);
+// // Int32Array [3, 4, 5, 4, 5]
+//
+// [].copyWithin.call(new Int32Array([1, 2, 3, 4, 5]), 0, 3, 4);
+// // Int32Array [4, 2, 3, 4, 5]
 ```
 
 ## entries() 메소드
@@ -220,7 +219,8 @@ console.log(eArr.next().value); // [0, 'a']
 console.log(eArr.next().value); // [1, 'b']
 console.log(eArr.next().value); // [2, 'c']
 
-// Same as above, using a for…of loop:
+// for of 를 사용해도 동일한 결과를 얻을 수 있다.
+// (http://hacks.mozilla.or.kr/2015/08/es6-in-depth-iterators-and-the-for-of-loop/)
 var arr = ['a', 'b', 'c'];
 var eArr = arr.entries();
 
@@ -243,7 +243,7 @@ console.log(iterator.next()); // { value: 1, done: false }
 console.log(iterator.next()); // { value: 2, done: false }
 console.log(iterator.next()); // { value: undefined, done: true }
 
-// Key iterator doesn't ignore holes
+// keys()는 빈 값을 무시하지 않는다.
 var arr = ["a", , "c"];
 var sparseKeys = Object.keys(arr);
 var denseKeys = [...arr.keys()];
@@ -257,17 +257,15 @@ console.log(denseKeys);  // [0, 1, 2]
 
 ```js
 
-// Iteration using for...of loop
-
 var arr = ['w', 'y', 'k', 'o', 'p'];
 var eArr = arr.values();
-// your browser must support for..of loop
-// and let-scoped variables in for loops
+
+// 이터러블 객체에 for of 사용.
 for (let letter of eArr) {
   console.log(letter);
 }
 
-// Alternative iteration
+// next() 사용.
 var arr = ['w', 'y', 'k', 'o', 'p'];
 var eArr = arr.values();
 console.log(eArr.next().value); // w
