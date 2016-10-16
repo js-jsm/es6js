@@ -63,7 +63,7 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
 ```
 
 ##2. 특징
-  1. 일반 function 식에 비해 구문이 짧다.
+1. 일반 function 식에 비해 구문이 짧다.
 ```js
 //일반 함수
   var normalFunction = function(x, y) {
@@ -73,7 +73,7 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
   //화살표 함수
   var arrowFunction = (x, y) => x + y;
 ```
-  2. this 값을 렉시컬 바인딩한다.
+2. this 값을 렉시컬 바인딩한다.
 ```js
   var outFunction = function(paramFunction) {paramFunction();}
 
@@ -145,7 +145,7 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
   화살표 함수의 경우 this는 자신을 둘러싸는 문맥의 this를 참고하게 된다
   */
 ```
-   3 화살표함수는 생성자로써 사용될 수 없다
+3. 화살표함수는 생성자로써 사용될 수 없다
 ```js
   var constructor = function(){
     console.log(this);
@@ -156,7 +156,7 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
   var o = new constructorArrowFunction();
   // 결과값 : Uncaught TypeError: constructorArrowFunction is not a constructor(…)
 ```
-   4. 화살표 함수는 엄격모드("use strict")가 무시된다.
+4. 화살표 함수는 엄격모드("use strict")가 무시된다.
 ```js
   var strictFunction = function() {
     "use strict";
@@ -169,11 +169,10 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
     console.log(this);
   }
   strictArrowFunction(); // 결과값 : Window {...}
-
 ```
-  5. call 또는 apply는 this에 아무런 영향이 없다
+5. call 또는 apply는 this에 아무런 영향이 없다
 
-  6. 화살표 함수는 arguments 객체를 가지고 있지 않다
+6. 화살표 함수는 arguments 객체를 가지고 있지 않다
 ```js
   var argsFunction = function() {return arguments;}
   argsFunction(); // 결과값 : []
@@ -192,4 +191,4 @@ DAparam('밥'); //결과값 : 밥을 먹었더니 졸려요
   var argsArrowFunction = (...args) => args;
   argsArrowFunction(); // 결과값 : []
 ```
-  7. yield키워드는 화살표 함수 본문에서 사용할 수 없으며 그로인해 화살표 함수는 생성기(generator)로써 사용할 수 없다
+7. yield키워드는 화살표 함수 본문에서 사용할 수 없으며 그로인해 화살표 함수는 생성기(generator)로써 사용할 수 없다
