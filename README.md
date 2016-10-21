@@ -5,10 +5,10 @@
 ## 리뷰 일지
 
 - 16.10.16
-  - 태산 : 07 심볼
-  - 희경 : 02 화살표함수
+  - 태산 : [07 심볼](https://github.com/js-jsm/es6js/tree/master/07%20%EC%8B%AC%EB%B3%BC)
+  - 희경 : [02 화살표함수](https://github.com/js-jsm/es6js/tree/master/02%20%ED%99%94%EC%82%B4%ED%91%9C%20%ED%95%A8%EC%88%98)
 - 16.10.09
-  - 재남 : 03 다중 변수 및 인자 제어
+  - 재남 : [03 다중 변수 및 인자 제어](https://github.com/js-jsm/es6js/tree/master/03%20%EB%8B%A4%EC%A4%91%20%EB%B3%80%EC%88%98%20%EB%B0%8F%20%EC%9D%B8%EC%9E%90%20%EC%A0%9C%EC%96%B4)
 
 
 ## 목차
