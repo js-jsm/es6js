@@ -37,6 +37,7 @@ const Car = class {
 #### 2) `constructor` method
 
 `constructor` 메소드는 클래스로 인스턴스를 생성할 때 초기화 목적으로 자동 호출되는 특별한 메소드로서, 기존의 생성자함수와 동일한 역할을 한다.
+순서는 상관없음. (맨 마지막에 선언해도 잘 동작한다)
 
 ```js
 // ES5
@@ -88,8 +89,8 @@ console.log(tico.addFuel());   // 1
 const matiz = new tico.constructor();
 console.log(matiz.addFuel());  // 1
 
-const ray = c1.constructor();
-  // Uncaught TypeError: Class constructor P cannot be invoked without 'new'
+const ray = tico.constructor();
+  // Uncaught TypeError: Class constructor Car cannot be invoked without 'new'
 ```
 
 constructor 메소드 내에서는 특별한 함수인 `super(arguments)`를 호출할 수 있는데, 이에 대해서는 `extends` 파트에서 자세히 다루겠다.

@@ -49,10 +49,10 @@
   + Template Literal &amp; Tagged Template
   + Unicode
 
-### 05 [객체](/05%20객체)
+### 05 [객체](/05%20객체) `소라 in progress`
   + Object
 
-### 06 [컬렉션](/06%20컬렉션)
+### 06 [컬렉션](/06%20컬렉션) `유리 in progress`
   + Map
   + Set
   + WeakMap
@@ -78,7 +78,7 @@
 ### 12 [클래스](/12%20클래스) `재남 in progress`
   + Class
 
-### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터) `제인 in progress`
+### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터)
   + for of
   + iterable
   + iterator
