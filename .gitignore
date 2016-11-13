@@ -2,3 +2,10 @@
 es6js.sublime-project
 
 es6js.sublime-workspace
+
+**/.idea/*
+**/.git/*
+**/node_modules/
+**/js/**/*.js
+**/package.json
+**/*.map
