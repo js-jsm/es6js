@@ -88,7 +88,7 @@ console.log(x.x); // 12
 console.log(x.y); // 13
 ```
 
-_ _ proto _ _속성은 오브젝트 설정 오브젝트 리터럴 정의에 사용될 수 [[Prototype]]대안이다.
+_ _ proto _ _속성은 오브젝트 설정, 오브젝트 리터럴 정의에 사용될 [[Prototype]] 대안이다.
 
 ```js
 var shape = {};
