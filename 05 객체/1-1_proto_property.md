@@ -1,11 +1,9 @@
 # CH 5. 객체
 
-## 5-1. 객체(Object)의 기본정의
-
 자바스크립트는 객체기반의 스크립트 언어이며 자바스크립트를 이루고 있는 거의 모든 것들이 객체로 존재한다.
 단순한 데이터 타입(숫자, 문자열, 불리언, null, undefined)을 제외한 다른 값들은 모두 객체이다.
 
-### 5-1-1. _ _ proto _ _ 프로퍼티
+## 5-1. _ _ proto _ _ 프로퍼티
 
 자바스크립트의 모든 객체는 자신을 생성한 객체 원형에 대한 숨겨진 연결을 갖는다. 이때 자기 자신을 생성하기 위해 사용된 객체 원형을 프로토타입이란 한다.
 자바스크립트의 모든 객체는 Object 객체의 프로토타입을 기반으로 확장 되었기 때문에 이 연결의 끝은 Object 객체의 프로토타입 Object이다.
@@ -71,7 +69,7 @@ Object.getPrototypeOf(obj); // Object {name: "es6js"}
 -
 
 
-[[prototype]]는 다루기 까다로운 프로퍼티라서 일부 브라우저는 _ _ proto _ _라는 특별한 프로퍼티를 객체에 두어 밖에서도 접근할 수 있게 하고 덕분에 한결 프로토타입을 다루기 수월해졌다. 이렇게 ES5까지 정식 표준이 아니었던 _ _ proto _ _프로퍼티는 워낙 많이 쓰이다 보니 드디어 ES6에서 표준이 되었다.
+[[prototype]]는 다루기 까다로운 프로퍼티라서 일부 브라우저는 _ _ proto _ _라는 특별한 프로퍼티를 객체에 두어 밖에서도 접근할 수 있게 하고 덕분에 한결 프로토타입을 다루기 수월해졌다. 현재 대부분의 브라우저가 지원하고 있고 속성의 존재와 정확한 동작, 그리고 웹 브라우저 호환성을 확보하기 위해 레거시 기능으로 ECMAScript 6에서 표준화되었다.
 
 ```js
 // es5
@@ -89,4 +87,24 @@ let x = {x: 12, __proto__: {y: 13}};
 console.log(x.x); // 12
 console.log(x.y); // 13
 ```
+
+_ _ proto _ _속성은 오브젝트 설정 오브젝트 리터럴 정의에 사용될 수 [[Prototype]]대안
+
+```js
+var shape = {};
+
+function Circle(){
+  name : 'es6js'
+}
+circle = new Circle();
+
+// Set the object prototype
+shape.__proto__ = circle;
+
+// Get the object prototype
+console.log(shape.__proto__ === circle); // true
+```
+
+
+### 5-1-1. Object.is() 메소드
 
