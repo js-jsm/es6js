@@ -105,7 +105,7 @@ shape.__proto__ = circle;
 console.log(shape.__proto__ === circle); // true
 ```
 
-## 5-1-1. _ _ proto _ _getter 함수, _ _ proto _ _setter 함수
+### _ _ proto _ _getter 함수, _ _ proto _ _setter 함수
 
 _ _ proto _ _속성은 getter와 setter 함수로 Object.prototype에 쉽게 접근할 수 있다. 
 
