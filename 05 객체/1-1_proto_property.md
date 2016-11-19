@@ -164,7 +164,7 @@ console.log(noProto.__proto__); // 17
 console.log(Object.getPrototypeOf(noProto)); // null
 ```
 
-### _ _ proto _ _와 prototype이 같은 지 테스트
+### _ _ proto _ _와 prototype 테스트
 
 ```js
 // 생성자로 사용할 함수 선언
