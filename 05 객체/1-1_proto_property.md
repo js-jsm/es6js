@@ -107,13 +107,19 @@ console.log(shape.__proto__ === circle); // true
 
 ## 5-1-1. _ _ proto _ _getter 함수, _ _ proto _ _setter 함수
 
-_ _ proto _ _속성은 getter 및 setter 함수로 이루어진 Object.prototype에 쉽게 접근할 수 있는 속성이다. 
+_ _ proto _ _속성은 getter와 setter 함수로 Object.prototype에 쉽게 접근할 수 있다. 
 
-_ _ proto _ _getter 함수는 객체의 내부 [[Prototype]]의 가치를 외부에 노출되며,
+_ _ proto _ _getter 함수는 객체의 내부 [[Prototype]]의 값을 외부에 노출해주며,
 _ _ proto _ _setter 함수는 객체의 [[Prototype]]를 변경할 수 있다.
 
-이전에 Object.isExtensible() 메소드로 객체가 확장 가능한지(객체에 새 속성을 추가할 수 있는지 여부)를 확인해야 한다. 
+> 주의 : 이전에 Object.isExtensible() 메소드로 객체가 확장 가능한지(객체에 새 속성을 추가할 수 있는지 여부)를 확인해야 한다. 
 확장 가능하지 않을 경우에는 TypeError가 발생된다.
+
+```js
+
+... ㅠㅠ...
+
+```
 
 
 -
