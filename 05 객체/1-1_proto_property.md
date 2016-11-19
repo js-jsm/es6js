@@ -21,12 +21,21 @@
 
 > 구문 : *Object.getPrototypeOf(obj)*
 
+```js
+var proto = {};
+Object.getPrototypeOf(proto); // Object
+
+var proto = 3;
+Object.getPrototypeOf(proto); // Number
+```
 
 > 주의 : ES5에서, obj 매개변수가 객체가 아닌 경우 TypeError 예외가 발생합니다. ES6에서, 매개변수는 Object로 강제됩니다.
+
 ```js
 // es5 code
 Object.getPrototypeOf("foo"); // TypeError
 ```
+
 ```js
 // es6 code
 Object.getPrototypeOf("foo"); // String.prototype
@@ -35,6 +44,7 @@ Object.getPrototypeOf("foo"); // String.prototype
 * _생성자 함수_ : new 키워드로 객체를 생성할 수 있는 함수, 초창기의 프로토타입 상속 방식
 
 > 구문 : *new constructor[([arguments])]*
+
 ```js
 function Proto(){}
 Proto.prototype.name = 'es6js';
@@ -47,6 +57,7 @@ Object.getPrototypeOf(obj); // Object {name: "es6js"}
 * _Object.create() 메소드_ : 지정된 프로토타입 객체 및 속성(property)을 갖는 새 객체를 생성
 
 > 구문 : *Object.create(proto[, propertiesObject])*
+
 ```js
 var proto = {
   name:'es6js'
