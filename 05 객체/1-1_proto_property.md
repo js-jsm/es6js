@@ -31,12 +31,12 @@ Object.getPrototypeOf(proto); // Number
 > 주의 : ES5에서, obj 매개변수가 객체가 아닌 경우 TypeError 예외가 발생합니다. ES6에서, 매개변수는 Object로 강제됩니다.
 
 ```js
-// es5 code
+// ES5 code
 Object.getPrototypeOf("foo"); // TypeError
 ```
 
 ```js
-// es6 code
+// ES6 code
 Object.getPrototypeOf("foo"); // String.prototype
 ```
 
@@ -88,7 +88,7 @@ console.log(x.x); // 12
 console.log(x.y); // 13
 ```
 
-_ _ proto _ _속성은 오브젝트 설정 오브젝트 리터럴 정의에 사용될 수 [[Prototype]]대안
+_ _ proto _ _속성은 오브젝트 설정 오브젝트 리터럴 정의에 사용될 수 [[Prototype]]대안이다.
 
 ```js
 var shape = {};
@@ -105,6 +105,87 @@ shape.__proto__ = circle;
 console.log(shape.__proto__ === circle); // true
 ```
 
+## 5-1-1. _ _ proto _ _getter 함수, _ _ proto _ _setter 함수
 
-### 5-1-1. Object.is() 메소드
+_ _ proto _ _속성은 getter 및 setter 함수로 이루어진 Object.prototype에 쉽게 접근할 수 있는 속성이다. 
 
+_ _ proto _ _getter 함수는 객체의 내부 [[Prototype]]의 가치를 외부에 노출되며,
+_ _ proto _ _setter 함수는 객체의 [[Prototype]]를 변경할 수 있다.
+
+이전에 Object.isExtensible() 메소드로 객체가 확장 가능한지(객체에 새 속성을 추가할 수 있는지 여부)를 확인해야 한다. 
+확장 가능하지 않을 경우에는 TypeError가 발생된다.
+
+
+-
+
+* _Object.isExtensible() 메소드_ : 객체가 확장 가능한지(객체에 새 속성을 추가할 수 있는지 여부)를 결정
+
+> 구문 : *Object.isExtensible(obj)*
+
+```js
+var empty = {};
+Object.isExtensible(empty); // === true
+```
+
+> 주의 : ES6에서는 비객체 인수는 보통 객체처럼 다뤄지며, false를 반환한다.
+
+```js
+// ES5 code
+Object.isExtensible(1); // TypeError
+```
+
+```js
+// ES5 code
+Object.isExtensible(1); // false
+```
+
+-
+
+
+
+결국 Object.prototype을 참조하여 _ _ proto _ _으로 접근하여 속성을 찾는다. 그러나 Object.prototype 참조만 하고 접근을 한 뒤에는 속성을 찾을 수 없다.
+Object.prototype이 참조되기 전에 몇 가지 다른 _ _ proto _ _가 속성을 찾아낸 후, 그 속성은 Object.prototype 위에서 찾아낸 속성을 숨긴다.
+
+```js
+var noProto = Object.create(null);
+
+console.log(typeof noProto.__proto__); // undefined
+console.log(Object.getPrototypeOf(noProto)); // null
+
+noProto.__proto__ = 17;
+
+console.log(noProto.__proto__); // 17
+console.log(Object.getPrototypeOf(noProto)); // null
+```
+
+### _ _ proto _ _와 prototype이 같은 지 테스트
+
+```js
+// 생성자로 사용할 함수 선언
+function Employee(){}
+
+// 새로운 인스턴스 생성
+var fred = new Employee();
+
+fred.__proto__ === Employee.prototype; // true
+
+fred.__proto__; // Object{} //constructor: function Employee()
+```
+
+```js
+// 새로운 함수 선언
+function Cow(){}
+
+// Cow 함수의 프로토타입을 할당하여 변경
+fred.__proto__ = Cow.prototype;
+
+fred.__proto__; // Object{} //constructor: function Cow()
+```
+
+```js
+fred.__proto__ === Employee.prototype; // false
+fred.__proto__ === Cow.prototype; // true
+```
+
+fred 인스턴스는 Employee를 상속하고 있는 상태에서 다른 개체 fred._ _ proto _ _를 할당하여 변경하게 되면,
+fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee.prototype에서 원래 상속 된 속성을 잃게 된다.
