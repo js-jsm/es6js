@@ -28,7 +28,8 @@ Object.getPrototypeOf('foo'); // Object{}
 ```js
 // es5 code
 Object.getPrototypeOf("foo"); // TypeError
-
+```
+```js
 // es6 code
 Object.getPrototypeOf("foo"); // String.prototype
 ```
