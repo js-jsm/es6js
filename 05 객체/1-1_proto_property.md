@@ -261,19 +261,27 @@ console.log(now); // Wed Apr 18 11:13:25 GMT-0700 (Pacific Daylight Time) 2001
 * 필수 키
 
 > configurable
+
 이 속성기술자는 해당 객체로부터 그 속성을 제거할 수 있는지를 기술한다. true라면 삭제할 수 있다.
+
 기본값은 false.
 
 > enumerable
+
 해당 객체의 키가 열거 가능한지를 기술한다. true라면 열거가능하다.
+
 기본값은 false.
 
 > value
+
 속성에 해당되는 값으로 오직 적합한 자바스크립트 값(number, object, function, etc)만 올 수 있다.
+
 기본값은 undefined.
 
 > writable
+
 writable이 true로 설정되면 할당연산자assignment operator를 통해 값을 바꿀 수 있다.
+
 기본값은 false.
 
 -
