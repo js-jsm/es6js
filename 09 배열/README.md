@@ -1,24 +1,22 @@
-| 재필1 | 09 배열 | Array
-
-# 배열
+# CH 9. 배열 - `by 재필`
 
 ## Array.from(arrayLike|iterable[, mapFunc, thisArg]) 메소드
 
-유사 배열 혹은 반복 가능한 객체로부터 새 Array 인스턴스를 만든다.  
+유사 배열 혹은 반복 가능한 객체로부터 새 Array 인스턴스를 만든다.
 
-- arrayLike : length 프로퍼티와 인덱스 처리된 엘리먼트를 지닌 객체.  
-- iterable :  매 호출시마다 한 개의 엘리먼트를 인출할 수 있는 객체.  
+- arrayLike : length 프로퍼티와 인덱스 처리된 엘리먼트를 지닌 객체.
+- iterable :  매 호출시마다 한 개의 엘리먼트를 인출할 수 있는 객체.
 - mapFunc : 배열의 모든 요소를 실행할 Map함수
-- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.  
+- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.
 
 ES6에서 클래스 구문은 내장 클래스 및 사용자 정의 클래스의 서브 클래스화를 허용한다.
 Array.from과 같은 클래스 정적 메소드는 Array가 아닌, Array의 서브 클래스를 상속받고 서브 클래스의 새 인스턴스를 만든다.
 
-> *ES5에서는 Array.prototype.slice()를 사용했다.*  
-> var arr1 = Array.prototype.slice.call(arguments); // ES5  
-> const arr2 = Array.from(arguments); // ES6  
+> *ES5에서는 Array.prototype.slice()를 사용했다.*
+> var arr1 = Array.prototype.slice.call(arguments); // ES5
+> const arr2 = Array.from(arguments); // ES6
 
-> 유사 배열 객체 : (length 속성과 인덱싱된 요소를 가진 객체)  
+> 유사 배열 객체 : (length 속성과 인덱싱된 요소를 가진 객체)
 > 반복 가능한 객체 : (Map과 Set와 같이 객체의 요소를 얻을 수 있는 객체).
 
 
@@ -34,7 +32,7 @@ Array.from([1, 2, 3], x => x + x);
 // [2, 4, 6]
 
 // 연속된 숫자배열 생성
-Array.from({length: 5}, (v, k) => k);    
+Array.from({length: 5}, (v, k) => k);
 // [0, 1, 2, 3, 4]
 
 // 배열과 비슷한 형태의 arguments를 배열로 변환
@@ -47,13 +45,13 @@ f(1, 2, 3);
 // [iterable object]
 // Set
 var s = new Set(["foo", window]);
-Array.from(s);   
+Array.from(s);
 // ["foo", window]
 
 // Map
 var m = new Map([[1, 2], [2, 4], [4, 8]]);
 Array.from(m);
-// [[1, 2], [2, 4], [4, 8]]  
+// [[1, 2], [2, 4], [4, 8]]
 
 // iterable한 값일 경우 spread operator를 사용해 배열로 변환 할 수 있다.
 const arr1 = [...'abc']; // ["a", "b", "c"]
