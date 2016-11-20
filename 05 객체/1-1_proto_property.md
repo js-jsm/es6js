@@ -94,27 +94,32 @@ _ _ proto _ _속성은 오브젝트 설정, 오브젝트 리터럴 정의에 사
 var shape = {};
 
 function Circle(){
-  name : 'es6js'
+  this.name = 'es5js';
 }
+
 circle = new Circle();
+circle.name = 'es6js';
 
 // Set the object prototype
 shape.__proto__ = circle;
 
 // Get the object prototype
 console.log(shape.__proto__ === circle); // true
+
+shape.name; // es6js
+shape // Circle {}
 ```
 
 결국 Object.prototype을 참조하여 _ _ proto _ _으로 접근하여 속성을 찾는다. 그러나 Object.prototype 참조만 하고 접근을 한 뒤에는 속성을 찾을 수 없다.
-Object.prototype이 참조되기 전에 몇 가지 다른 _ _ proto _ _가 속성을 찾아낸 후, 그 속성은 Object.prototype 위에서 찾아낸 속성을 숨긴다.
+Object.prototype이 참조되기 전에 몇 가지 다른 _ _ proto _ _가 속성을 찾아낸 후, 그 속성은 Object.prototype 위에서 찾아낸 속성의 기능을 하지 않는다.
 
 ```js
-var noProto = Object.create(null);
+var noProto = Object.create({a:10}); // 객체 또는 null 값
 
-console.log(typeof noProto.__proto__); // undefined
+console.log(typeof noProto.__proto__);
 console.log(Object.getPrototypeOf(noProto)); // null
 
-noProto.__proto__ = 17;
+noProto.__proto__ = {b:20};
 
 console.log(noProto.__proto__); // 17
 console.log(Object.getPrototypeOf(noProto)); // null
@@ -218,6 +223,23 @@ console.log(o.a); // 25
 ```
 
 ```js
+var o = {
+  a: 7,
+  get b() { 
+    return this.a + 1;
+  },
+  set c(x) {
+    this.a = x / 2
+  }
+};
+
+var obj = Object.create(o);
+
+console.log(obj); // Object {}
+console.log(o); // Object {a: 7}
+```
+
+```js
 var d = Date.prototype;
 Object.defineProperty(d, "year", {
   get: function() { return this.getFullYear() },
@@ -230,24 +252,29 @@ now.year = 2001; // 987617605170
 console.log(now); // Wed Apr 18 11:13:25 GMT-0700 (Pacific Daylight Time) 2001
 ```
 
-```js
-var o = { a:0 }
-
-Object.defineProperties(o, {
-    "b": { get: function () { return this.a + 1; } },
-    "c": { set: function (x) { this.a = x / 2; } }
-});
-
-o.c = 10 // Runs the setter, which assigns 10 / 2 (5) to the 'a' property
-console.log(o.b) // Runs the getter, which yields a + 1 or 6
-```
-
 -
 
 * _Object.defineProperty() 메소드_ : 객체에 직접 새로운 속성을 정의하거나 이미 존재하는 객체를 수정한 뒤 그 객체를 반환
 
 > 구문 : *Object.defineProperty(obj, prop, descriptor)*
 
--
+* 필수 키
 
+> configurable
+이 속성기술자는 해당 객체로부터 그 속성을 제거할 수 있는지를 기술한다. true라면 삭제할 수 있다.
+기본값은 false.
+
+> enumerable
+해당 객체의 키가 열거 가능한지를 기술한다. true라면 열거가능하다.
+기본값은 false.
+
+> value
+속성에 해당되는 값으로 오직 적합한 자바스크립트 값(number, object, function, etc)만 올 수 있다.
+기본값은 undefined.
+
+> writable
+writable이 true로 설정되면 할당연산자assignment operator를 통해 값을 바꿀 수 있다.
+기본값은 false.
+
+-
 
