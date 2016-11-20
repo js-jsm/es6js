@@ -49,7 +49,7 @@ let multiline = `짜증나는 String처리 모두 잊고싶을때
 
  > 태그된 템플릿은 단지 시작하는 백틱 앞에 태그(tag)를 하나 더 붙인 템플릿 문자열입니다.
 
-일반 템플릿 문자열이 가진 한계점을 보완 할 수 있다. Tagged Templet 자체가 문자열 필요도 없을정도로 유연하다. 
+일반 템플릿 문자열이 가진 한계점을 보완 할 수 있다. 
 
 ##### HTML 파싱
 ```js
@@ -90,6 +90,8 @@ i18n`Hello ${name}, you have ${amount}:c(CAD) in your bank account.`
 
 #### 템플릿 언어
 
+>Tagged Templet 자체가 문자열 필요도 없을정도로 유연하다. 
+
 ```js
 // ES6 태그된 템플릿(tagged templates)을 기반으로 만든
 // 순전히 샘플로 만들어본 템플릿 언어
@@ -105,7 +107,7 @@ var libraryHtml = hashTemplate``
 #### 마크다운에서는??
 
 ```js
-To display a message, write ``alert(`hello world!`)```.
+To display a message, write ``alert(`hello world!`)``.
 
 ///To display a message, write alert(hello world!).
 ```
