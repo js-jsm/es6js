@@ -21,23 +21,27 @@ CH 06 콜렉션
 
 ####데이터 세팅
 
-<pre><code>
+```js
 let map = new Map();
 map.set(new Date(), function today () {});
 map.set(() => 'key', { pony: 'foo' });
 map.set(Symbol('items'), [1, 2]);
-</code></pre>
+```
+
 [['key', 'value'], ['key', 'value']] 형태의 collection이나 iterable protocol은<br>
  Map의 생성자를 통해서 쉽게 map으로 변형할 수 있다.
-<pre><code>
+
+```js
 let map = new Map([
   [new Date(), function today () {}],
   [() => 'key', { pony: 'foo' }],
   [Symbol('items'), [1, 2]]
 ]);
-</code></pre>
+```
+
 Map의 생성자는 내부적으로 아래와 같이 동작한다. forEach를 이용해서 key/value쌍을 하나씩 map에 할당해주고 있다
-<pre><code>
+
+```js
 let items = [
   [new Date(), function today () {}],
   [() => 'key', { pony: 'foo' }],
@@ -45,11 +49,12 @@ let items = [
 ]
 let map = new Map();
 items.forEach(([key, value]) => map.set(key, value));
-</code></pre>
+```
 
 #### 키
 어떤 값이든 키가 될 수 있다.
-<pre><code>
+
+```js
 const map = new Map();
 
 const KEY1 = {};
@@ -59,27 +64,29 @@ console.log(map.get(KEY1));     // hello
 const KEY2 = {};
 map.set(KEY2, 'world');
 console.log(map.get(KEY2));     // world
-</code></pre>
+```
 
-<pre><code>
+```js
 new Map().get('asfddfsasadf')
 //undefined
-</code></pre>
+```
 
 
 동일한 key에 값을 넣으면 이전의 값을 덮어쓰게 된다.
-<pre><code>
+
+```js
 let map = new Map()
 map.set('a', 'a')
 map.set('a', 'b')
 map.set('a', 'c')
 console.log([...map])
 // <- [['a', 'c']]
-</code></pre>
+```
 
 
 ES6 Map에서 NaN은 corner-case가 된다. key로 사용될 때는 동일하게 인식된다.
-<pre><code>
+
+```js
 console.log(NaN === NaN)
 // <- false
 let map = new Map()
@@ -90,9 +97,9 @@ console.log([...map])
 
 map.set(NaN, 123);
 map.get(NaN);           // 123
-</code></pre>
+```
 
-<pre><code>
+```js
 let map = new Map([[NaN, 1], [Symbol(), 2], ['foo', 'bar']])
 console.log(map.has(NaN))
 // <- true, NaN은 key로 사용 가능하다
@@ -102,32 +109,33 @@ console.log(map.has('foo'))
 // <- true
 console.log(map.has('bar'))
 // <- false
-</code></pre>
+```
 
 ####단일 엔트리에 대한 제어
-<pre><code>
+
+```js
   const map = new Map();
   map.set('foo', 123);
   map.get('foo');         // 123
   map.has('foo');         // true
   map.delete('foo');      // true
   map.has('foo');         // false
-  
-</code></pre>
+```
 
 ####맵의 사이즈 결정 및 맵의 내용 제거
-<pre><code>
+
+```js
 const map = new Map();
 map.set('foo', true);
 map.set('bar', false);
 map.size                // 2
 map.clear();
 map.size                // 0
-
-</code></pre>
+```
 
 ####spread operator도 사용할 수 있다.
-<pre><code>
+
+```js
 let map = new Map();
 map.set('p', 'o');
 map.set('n', 'y');
@@ -135,10 +143,11 @@ map.set('f', 'o');
 map.set('o', '!');
 console.log([...map]);
 // <- [['p', 'o'], ['n', 'y'], ['f', 'o'], ['o', '!']]
-</code></pre>
+```
 
 ####for of 루프를 사용하여 map을 순회
-<pre><code>
+
+```js
 let map = new Map();
 map.set('p', 'o');
 map.set('n', 'y');
@@ -147,4 +156,4 @@ map.set('o', '!');
 for (let [key, value] of map) {
   console.log(key, value)
 }
-</code></pre>
+```
