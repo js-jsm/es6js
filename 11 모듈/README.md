@@ -16,24 +16,28 @@
 ```js
 export { variable };
 export { variable1, variable2, variable3, ... };
-export { variable as myVariable };
-export { variable as myVariable, variable2 as myVariable2 };
-export { variable as default };
+export { variable as myVariable }; //치환
+export { variable as myVariable, variable2 as myVariable2 }; //여러개 치환
+export { variable as default }; //default를 치환
 export { variable as default, variable1 as myVariable1, variable2 };
 export default function() {};
+
+//사용은 가능하나 권장되지 않는 방법(저는 and 양희경)
 export { variable1, variable2 } from "./myModuleFile";
 export * from "./myModuleFile";
 ```
 
 ## Module import
 ```js
-import variable from './myModuleFile';
 import { variable } from './myModuleFile';
-import { variable1 as variable2 } from './myModuleFile';
+import { variable1, variable2, variable3, ... } from './myModuleFile';
+import { myVariable as whatever } from './myModuleFile';
+import { myVariable1 as whatever1, myVariable2 as whatever2 } from './myModuleFile';
+import variable from './myModuleFile';
 import { variable1, variable2 } from './myModuleFile';
 import { variable1, variable2 as variable3 } from './myModuleFile';
 import variable, { variable1, variable2 } from './myModuleFile';
-import './myModuleFile';
+import './myModuleFile'; //의존성 주입(?)
 import * as variable from './myModuleFile';
 import variable, * as variable1 from './myModuleFile';
 ```
