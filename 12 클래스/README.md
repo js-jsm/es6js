@@ -96,7 +96,7 @@ const ray = tico.constructor();
 constructor 메소드 내에서는 특별한 함수인 `super(arguments)`를 호출할 수 있는데, 이에 대해서는 `extends` 파트에서 자세히 다루겠다.
 
 
-### 3) methods
+#### 3) methods
 
 객체의 메소드와 마찬가지로 클래스의 인스턴스에서 상속받아 호출할 수 있는 prototype 프로퍼티이다. 기존의 prototype 메소드와 마찬가지로 동작하지만, 생성자함수로는 활용할 수 없다.
 
@@ -132,7 +132,7 @@ const ray = new tico.addFuel();             // Uncaught TypeError: tico.addFuel 
 const matiz = new Car.prototype.addFuel();  // Uncaught TypeError: Car.prototype.addFuel is not a constructor
 ```
 
-### 4) static methods
+#### 4) static methods
 
 메소드 앞에 'static' 키워드를 선언하면 해당 메소드는 정적 메소드가 된다. 정적 메소드는 클래스 자신이 갖는 메소드이며, 인스턴스에서는 호출할 수 없다. 주로 클래스의 유틸리티성 함수를 생성하는데 사용된다.
 
@@ -150,4 +150,139 @@ const cat = new Animal(4);
 const bird = new Animal(2);
 console.log(Animal.getTotalLegs(dog, cat, bird));  // 10
 dog.getTotalLegs();  // Uncaught TypeError: dog.getTotalLegs is not a function
+```
+
+
+### 12-1-3. 클래스 상속
+
+#### 1) `extends`
+super 클래스를 상속받은 sub 클래스를 정의할 수 있다.
+
+```js
+class Animal {
+  constructor(sound) {
+    this.sound = sound;
+  }
+  bark() {
+    return this.sound;
+  }
+}
+
+class Dog extends Animal {
+  waveTail() {
+    return '살랑살랑';
+  }
+}
+
+const dog = new Dog('왈왈');
+dog.bark();      // 왈왈
+dog.waveTail();  // 살랑살랑
+```
+
+#### 2) `super`
+상위 클래스의 메소드를 호출할 수 있다.
+
+```js
+class Animal {
+  constructor(sound) {
+    this.sound = sound;
+  }
+  bark() {
+    return this.sound;
+  }
+}
+
+class Dog extends Animal {
+  constructor(...p) {
+    super(...p);
+    this.hasTail = true;
+  }
+  waveTail() {
+    return this.hasTail ? '흔들흔들' : '꼬리가 없어요';
+  }
+}
+
+const dog = new Dog('왈왈');
+dog.bark();      // 왈왈
+dog.waveTail();  // 흔들흔들
+```
+
+#### 3) 메소드 오버라이드
+상위 클래스의 메소드를 덮어씌울 수 있다. super 명령어와 함께 쓸 수도 있다.
+```js
+class Animal {
+  constructor(sound) {
+    this.sound = sound;
+  }
+  bark() {
+    return this.sound;
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    return super.bark() + ' 크르르';
+  }
+}
+
+const dog = new Dog('왈왈');
+dog.bark();      // 왈왈
+```
+
+#### 4) 상속 체이닝
+```js
+class Alive {
+  constructor() {
+    this.isAlive = true;
+  }
+}
+class Animal extends Alive {
+  constructor(sound) {
+    this.sound = sound;
+  }
+}
+class Dog extends Animal {
+  bark() {
+    return this.sound;
+  }
+}
+```
+
+```js
+class Dog extends class Animal extends class Alive  {
+  constructor(sound) {
+    this.sound = sound;
+  }
+} {
+  constructor(...p) {
+    super(...p);
+    this.isAlive = true;
+  }
+} {
+  bark() {
+    return this.sound;
+  }
+}
+const dog = new Dog('왈왈');
+dog.bark();    // 왈왈
+```
+
+상위클래스에는 네이밍을 지정하지 않아도 동작한다.
+```js
+class Dog extends class extends class {
+  constructor(sound) {
+    this.sound = sound;
+  }
+} {
+  constructor(...p) {
+    super(...p);
+    this.isAlive = true;
+  }
+} {
+  bark() {
+    return this.sound;
+  }
+}
+const dog = new Dog('왈왈');
+dog.bark();    // 왈왈
 ```

@@ -1,24 +1,22 @@
-| 재필1 | 09 배열 | Array
-
-# 배열
+# CH 9. 배열 - `by 재필`
 
 ## Array.from(arrayLike|iterable[, mapFunc, thisArg]) 메소드
 
-유사 배열 혹은 반복 가능한 객체로부터 새 Array 인스턴스를 만든다.  
+유사 배열 혹은 반복 가능한 객체로부터 새 Array 인스턴스를 만든다.
 
-- arrayLike : length 프로퍼티와 인덱스 처리된 엘리먼트를 지닌 객체.  
-- iterable :  매 호출시마다 한 개의 엘리먼트를 인출할 수 있는 객체.  
+- arrayLike : length 프로퍼티와 인덱스 처리된 엘리먼트를 지닌 객체.
+- iterable :  매 호출시마다 한 개의 엘리먼트를 인출할 수 있는 객체.
 - mapFunc : 배열의 모든 요소를 실행할 Map함수
-- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.  
+- this : mapFunc 실행시에 Execution Context를 지정할 수 있다.
 
 ES6에서 클래스 구문은 내장 클래스 및 사용자 정의 클래스의 서브 클래스화를 허용한다.
 Array.from과 같은 클래스 정적 메소드는 Array가 아닌, Array의 서브 클래스를 상속받고 서브 클래스의 새 인스턴스를 만든다.
 
-> *ES5에서는 Array.prototype.slice()를 사용했다.*  
-> var arr1 = Array.prototype.slice.call(arguments); // ES5  
-> const arr2 = Array.from(arguments); // ES6  
+> *ES5에서는 Array.prototype.slice()를 사용했다.*
+> var arr1 = Array.prototype.slice.call(arguments); // ES5
+> const arr2 = Array.from(arguments); // ES6
 
-> 유사 배열 객체 : (length 속성과 인덱싱된 요소를 가진 객체)  
+> 유사 배열 객체 : (length 속성과 인덱싱된 요소를 가진 객체)
 > 반복 가능한 객체 : (Map과 Set와 같이 객체의 요소를 얻을 수 있는 객체).
 
 
@@ -34,7 +32,7 @@ Array.from([1, 2, 3], x => x + x);
 // [2, 4, 6]
 
 // 연속된 숫자배열 생성
-Array.from({length: 5}, (v, k) => k);    
+Array.from({length: 5}, (v, k) => k);
 // [0, 1, 2, 3, 4]
 
 // 배열과 비슷한 형태의 arguments를 배열로 변환
@@ -47,13 +45,13 @@ f(1, 2, 3);
 // [iterable object]
 // Set
 var s = new Set(["foo", window]);
-Array.from(s);   
+Array.from(s);
 // ["foo", window]
 
 // Map
 var m = new Map([[1, 2], [2, 4], [4, 8]]);
 Array.from(m);
-// [[1, 2], [2, 4], [4, 8]]  
+// [[1, 2], [2, 4], [4, 8]]
 
 // iterable한 값일 경우 spread operator를 사용해 배열로 변환 할 수 있다.
 const arr1 = [...'abc']; // ["a", "b", "c"]
@@ -282,100 +280,3 @@ console.log(eArr.next().value); // k
 console.log(eArr.next().value); // o
 console.log(eArr.next().value); // p
 ```
-
-## 기타
-
-### 배열 내의 빈칸
-
-배열 내의 빈칸은 요소가 없음을 의미한다. 예를들어 다음 배열은 인덱스 1의 값이 비어있다. 인덱스 2는 비어있지 않다!
-
-```js
-const arr = ['a', , undefined, 'b']
-'use strict'
-0 in arr    // true
-1 in arr    // false
-2 in arr    // true
-3 in arr    // true
-arr[1]      // undefined
-```
-
-### 빈 칸 제거하기
-ES5 메서드인 `filter()`를 이용하면 빈 칸을 제거할 수 있다.
-```js
-['a',,'c'].filter(() => true)    // [ 'a', 'c' ]
-```
-
-> ES6의 이터레이션은 빈 칸을 undefined요소로 전환한다.
-```js
-[...['a',,'c']]    //[ 'a', undefined, 'c' ]
-```
-
-> ES6는 빈칸을 '존재하지 않는다'고 가정한다(기존 문법과의 호환성이 보장하는 한에서 그러하다).
-따라서 빈칸이 성능에 부정적인 영향을 미치지는 않을지를 두고 고민하지 않아도 된다.
-
-### ES6는 빈칸을 undefined 처럼 다룬다.
-
-```js
-Array.from(['a', ,'b'])                    // [ 'a', undefined, 'b' ]
-[ ,'a'].findIndex(x => x === undefined)    // 0
-[...[ ,'a'].entries()]                     // [ [ 0, undefined ], [ 1, 'a' ] ]
-```
-
-### Iteration 활용
-Array.prototype[Symbol.iterator]에 의해 생성된 이터레이터는 매 빈칸을 마치 undefined인 값이 있는 것처럼 다룬다.
-```js
-var arr = [, 'a'];
-var iter = arr[Symbol.iterator]();
-iter.next()    // { value: undefined, done: false }
-iter.next()    // { value: 'a', done: false }
-```
-
-spread operator(`...`)나 `for-of` 역시 이터레이션 프로토콜을 기반으로 하고 있으므로 빈칸에 대해 마찬가지로 취급한다.
-
-```js
-[...[, 'a']]    // [ undefined, 'a' ]
-
-for (const x of [, 'a']) {
-  console.log(x);
-}
-// undefined
-// a
-```
-
-_대부분의 Array prototype method(filter() 등)은 이터레이션 프로토콜을 사용하지 않음에 주의할 것!_
-
-
-## Array.prototype 메서드들의 빈칸 취급 형태
-
-메서드 | 빈칸인식 | input | result |
-:---: | :---: | --- | ---
-concat | 빈칸 | `['a',,'b'].concat(['c',,'d'])` | `['a',,'b','c',,'d']`
-copyWithin *ES6 | 빈칸 | `[,'a','b',,].copyWithin(2,0)` | `[,'a',,'a']`
-entries *ES6 | 요소 | `[...[,'a'].entries()]` | `[[0,undefined], [1,'a']]`
-every | 무시 | `[,'a'].every(x => x==='a')` | `true`
-fill *ES6 | 무관 | `new Array(3).fill('a')` | `['a','a','a']`
-filter  | 무시 | `['a',,'b'].filter(x => true)` | `['a','b']`
-find *ES6 | 요소 | `[,'a'].find(x => true)` | `undefined`
-findIndex *ES6 | 요소 | `[,'a'].findIndex(x => true)` | `0`
-forEach | 무시 | `[,'a'].forEach((x,i) => log(i));` | `1`
-indexOf | 무시 | `[,'a'].indexOf(undefined)` | `-1`
-join | 요소 | `[,'a',undefined,null].join('#')` | `'#a##'`
-keys *ES6 | 요소 | `[...[,'a'].keys()]` | `[0,1]`
-lastIndexOf | 무시 | `[,'a'].lastIndexOf(undefined)` | `-1`
-map | 빈칸 | `[,'a'].map(x => 1)` | `[,1]`
-pop | 요소 | `['a',,].pop()` | `undefined`
-push | 빈칸 | `new Array(1).push('a')` | `2`
-reduce | 무시 | `['#',,undefined].reduce((x,y)=>x+y)` | `'#undefined'`
-reduceRight | 무시 | `['#',,undefined].reduceRight((x,y)=>x+y)` | `'undefined#'`
-reverse | 빈칸 | `['a',,'b'].reverse()` | `['b',,'a']`
-shift | 요소 | `[,'a'].shift()` | `undefined`
-slice | 빈칸 | `[,'a'].slice(0,1)` | `[,]`
-some  | 무시 | `[,'a'].some(x => x !== 'a')` | `false`
-sort  | 빈칸 | `[,undefined,'a'].sort()` | `['a',undefined,,]`
-splice | 빈칸 | `['a',,].splice(1,1)` | `[,]`
-toString | 요소 | `[,'a',undefined,null].toString()` | `',a,,'`
-unshift | 빈칸 | `[,'a'].unshift('b')` | `3`
-values *ES6 | 요소 | `[...[,'a'].values()]` | `[undefined,'a']`
-**
-
-
