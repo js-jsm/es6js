@@ -1,3 +1,6 @@
+# OverView
+
+### [블로그에서보기](https://bcnam.github.io/bcnam.github.io/2016/11/17/2016-11-17-ES6-Iterable-and-Iterator/)
 
 JavaScript 외에 Java 나 C# , C++를 사용해본 경험이 있다면
 
@@ -69,10 +72,8 @@ iterator.next(); // Object{value: undefined, done: true}
 
 
 # Iterable Protocol
----
-{%blockquote ex) for..of 구조에서 어떠한 value 들이 반복되는지에 관한것 %}
-iterable protocol은 iteration 동작을 정의하거나 사용자 정의하는것을 허용한다.
-{%endblockquote %}
+> iterable protocol은 iteration 동작을 정의하거나 사용자 정의하는것을 허용한다.
+> - ex) for..of 구조에서 어떠한 value 들이 반복되는지에 관한것
 
 `Array, Map, Set, String`은 기본적으로 `Iterable Interface`가 내장되어 있다.
 
@@ -158,7 +159,6 @@ for (let iterator of obj) {
 ```
 
 # for..of loop
----
 
 지금까지 `Iteration Protocols` 인 `Iterable` 과 `Iterator` 를 알아 봤다.
 
@@ -200,7 +200,6 @@ for (let index in array) {
     console.log(array[index]); //1,2,3, function () =>....
 }
 ```
----
 
 **step 1** :  아직까지 문제가 없는듯 하다.
 
