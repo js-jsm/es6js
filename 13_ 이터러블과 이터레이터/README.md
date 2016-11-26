@@ -1,4 +1,6 @@
-# OverView
+# CH 13. Iterable & Iterator - `by 원준`
+
+## OverView
 
 ### [블로그에서보기](https://bcnam.github.io/bcnam.github.io/2016/11/17/2016-11-17-ES6-Iterable-and-Iterator/)
 
@@ -30,13 +32,12 @@ protocol 는 iterable 과 iterator 를 각각 정의하고 있다.
 
 나와같은 궁금증을 가진 사람이 질문글을 올렸었고 답변은 다음과 같다.
 
->
 >An iterable is a data structure that wants to make its elements accessible to the public. It does so by implementing a method >whose key is Symbol.iterator. That method is a factory for iterators.
 > - iterable 은 자료구조이고 `Symbol.iterator` 를 `key`로 사용해서 메서드를 구현 하면 된다. 이 메서드는 반복자들을 생산하는 메서드이다.
->
+
 >An iterator is a pointer for traversing the elements of a data structure (think cursors in databases).
 > - iterator 는 자료구조에 있는 요소를 탐색하기 위한 포인터 이다.
->
+
 
 `Iterable` 에 **factory for iterators** 대한 해석이 매끄럽지 않을수 있다.
 
@@ -71,7 +72,8 @@ iterator.next(); // Object{value: undefined, done: true}
 자세히 살펴 보고자 한다.
 
 
-# Iterable Protocol
+## Iterable Protocol
+
 > iterable protocol은 iteration 동작을 정의하거나 사용자 정의하는것을 허용한다.
 > - ex) for..of 구조에서 어떠한 value 들이 반복되는지에 관한것
 
@@ -120,8 +122,10 @@ for (let iterator of obj) {
 }
 ```
 
-# Iterator Protocol
+## Iterator Protocol
+
 ---
+
 `Iterator Protocol` 은 `Iterable Interface` 에서 **(유한,무한)** 반복 되는 값들의 순서를 만드는 표준방법을 정의한다.
 
  객체가 `next()` 메서드를 가지고 있고, 아래의 규칙에 따라 구현되어 있다면 그 객체는 `iterator` 이다.
@@ -158,7 +162,7 @@ for (let iterator of obj) {
 }
 ```
 
-# for..of loop
+## for..of loop
 
 지금까지 `Iteration Protocols` 인 `Iterable` 과 `Iterator` 를 알아 봤다.
 
@@ -244,7 +248,7 @@ for (let [key, value] of iterable) {
 
 따라서 기존에 있던 `for..in` 문법이나 `Object.keys()` 를 사용하여 순회 하는 방식을 이용하면 된다.
 
-## Reference
+### Reference
 
 - [ MDN - iteration protocols](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Iteration_protocols)
 
