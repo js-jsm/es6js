@@ -1,4 +1,4 @@
-#tmplate String
+#Template String
 
 ##목적
 문자열 채워넣기.. 등 수많은 기능이 있지만 가장 큰 목표는 String을 조금더 편리하게 쓰기위함!
