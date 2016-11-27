@@ -153,9 +153,10 @@ dog.getTotalLegs();  // Uncaught TypeError: dog.getTotalLegs is not a function
 ```
 
 
-### 12-1-3. 클래스 상속
+## 12-2. 클래스 상속
 
 #### 1) `extends`
+
 super 클래스를 상속받은 sub 클래스를 정의할 수 있다.
 
 ```js
@@ -180,6 +181,7 @@ dog.waveTail();  // 살랑살랑
 ```
 
 #### 2) `super`
+
 상위 클래스의 메소드를 호출할 수 있다.
 
 ```js
@@ -208,7 +210,9 @@ dog.waveTail();  // 흔들흔들
 ```
 
 #### 3) 메소드 오버라이드
+
 상위 클래스의 메소드를 덮어씌울 수 있다. super 명령어와 함께 쓸 수도 있다.
+
 ```js
 class Animal {
   constructor(sound) {
@@ -221,24 +225,30 @@ class Animal {
 
 class Dog extends Animal {
   bark() {
-    return super.bark() + ' 크르르';
+    return super.bark() + ' 아르르';
   }
 }
-
 const dog = new Dog('왈왈');
-dog.bark();      // 왈왈
+dog.bark();      // 왈왈 아르르
 ```
 
 #### 4) 상속 체이닝
+
 ```js
 class Alive {
   constructor() {
     this.isAlive = true;
   }
+  isAlive() {
+    return this.isAlive
+  }
 }
 class Animal extends Alive {
   constructor(sound) {
     this.sound = sound;
+  }
+  isDead() {
+    return !this.isAlive();
   }
 }
 class Dog extends Animal {
@@ -250,13 +260,19 @@ class Dog extends Animal {
 
 ```js
 class Dog extends class Animal extends class Alive  {
-  constructor(sound) {
-    this.sound = sound;
+  constructor() {
+    this.isAlive = true;
+  }
+  isAlive() {
+    return this.isAlive
   }
 } {
-  constructor(...p) {
-    super(...p);
-    this.isAlive = true;
+  constructor(sound) {
+    super();
+    this.sound = sound;
+  }
+  isDead() {
+    return !this.isAlive();
   }
 } {
   bark() {
@@ -268,15 +284,22 @@ dog.bark();    // 왈왈
 ```
 
 상위클래스에는 네이밍을 지정하지 않아도 동작한다.
+
 ```js
 class Dog extends class extends class {
-  constructor(sound) {
-    this.sound = sound;
+  constructor() {
+    this.isAlive = true;
+  }
+  isAlive() {
+    return this.isAlive
   }
 } {
-  constructor(...p) {
-    super(...p);
-    this.isAlive = true;
+  constructor(sound) {
+    super();
+    this.sound = sound;
+  }
+  isDead() {
+    return !this.isAlive();
   }
 } {
   bark() {
@@ -286,3 +309,124 @@ class Dog extends class extends class {
 const dog = new Dog('왈왈');
 dog.bark();    // 왈왈
 ```
+
+
+## 12-3. private data 구현
+
+es6의 class 문법에는 private data를 직접 지정할 수 있는 기능이 제공되지 않는다. 따라서 개발자가 직접 private data를 관리하여야 하는데, 그 방법을 소개한다.
+
+#### 1) naming convention `_`
+
+변수에 접두어 `_`를 붙이면 private data로 간주하기로 하는 규칙을 정하는 방법.
+
+
+#### 2) `constructor` 내부에서 할당
+
+class의 `constructor` 메소드는 인스턴스가 생성될 때 한번만 호출되므로 기존의 즉시실행함수처럼 변수를 보호할 수 있다.
+
+```js
+class Count {
+  constructor(_count) {
+    const methods = {
+      inc() { _count += 1; return _count; },
+      dec() { _count -= 1; return _count; },
+      getScore() { return _count; },
+      get score() { return _count; },
+      set score(v) { _count = v; }
+    };
+    Object.assign(this, methods);
+  }
+}
+const test = new Count();
+console.log(test.inc());
+console.log(test.inc());
+console.log(test.dec());
+console.log(test.getScore());
+```
+
+이 방법은 문제가 많다. delete로 메소드를 삭제할 수 있으며, getter/setter는 별도의 데이터를 접근하는 것으로 추측된다 (원인불명).
+
+
+#### 3) `Symbol` 활용
+
+즉시실행함수 혹은 블록 스코프 내에서 심볼을 통해 접근을 제한하는 방법이다.
+
+```js
+const Count = (() => {
+  const count = Symbol('COUNT');
+  class Count {
+    constructor() {
+      this[count] = 0;
+    }
+    inc() {
+      return ++this[count];
+    }
+    dec() {
+      return --this[count];
+    }
+    get score() { return this[count]; }
+    set score(n) { this[count] = n; }
+  }
+  return Count;
+})();
+const test = new Count();
+console.log(test.inc());
+console.log(test.inc());
+console.log(test.dec());
+console.log(test.score);
+test.score = 10;
+console.log(test.score);
+```
+
+이 방법은 Symbol의 접근 루트가 제한적이라서 가능한 방법이지만, 접근 루트가 아예 없는 것은 아니다.
+
+```js
+const testSymbol = Object.getOwnPropertySymbols(test)[0];
+test[testSymbol] = 20;
+console.log(test.score);
+```
+
+```js
+const testSymbol = Reflect.ownKeys(test)[0];
+test[testSymbol] = 20;
+console.log(test.score);
+```
+
+따라서 완벽한 private member가 되진 않으나, 이와 같은 접근을 제외한다면 다른 모든 접근으로부터는 보호되므로,
+절대적인 보호가 필요한 경우가 아니라면 적절하게 사용하기 좋은 방법이라 하겠다.
+
+
+#### 4) `WeakMap` 활용
+
+weakMap의 key에는 오직 참조형 데이터만을 지정할 수 있으며, 이 키값을 정확히 알고 있을 떄에만
+해당 프로퍼티의 값을 받아올 수 있다는 점을 이용한 방법이다.
+
+```js
+const Count = (() => {
+  const count = {COUNT: 'COUNT'};
+  class Count {
+    constructor() {
+      this.map = new WeakMap([[count, 0]]);
+    }
+    inc() {
+      return this.map.set(count, this.map.get(count) + 1);
+    }
+    dec() {
+      return this.map.set(count, this.map.get(count) - 1);
+    }
+    get score() { return this.map.get(count); }
+    set score(n) { this.map.set(count, n); }
+  }
+  return Count;
+})();
+const test = new Count();
+console.log(test.inc());
+console.log(test.inc());
+console.log(test.dec());
+console.log(test.score);
+test.score = 10;
+console.log(test.score);
+```
+
+WeakMap 활용법은 private member를 구현하는 가장 완벽한 방법이지만,
+오직 WeakMap용 method만을 이용할 수 있다는 단점이 있다.
