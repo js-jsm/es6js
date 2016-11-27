@@ -112,11 +112,9 @@ tagFunction(['Hello ', ' ', '!'], firstName, lastName)
 
 ##### 좀 더 실용적인 예제 (질의어)
  ```js
-//1
 $`a.${className}[href=~'//${domain}/']`
 /* 이 돔 쿼리는 css class 가 className이고, 그 타겟이 주어진 domain이 url인 모든 a 태그를 찾는다. 이 태그 함수 $는 인자들은 정확하게 이스케이프 하고, 문자열 연결 보다 더 안전한 접근을 보장한다.*/
 
-//2
 const tmpl = addrs => html`
     <table>
     ${addrs.map(addr => html`
