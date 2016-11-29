@@ -1,5 +1,7 @@
 ## OverView
 
+### [블로그에서보기](https://bcnam.github.io/bcnam.github.io/2016/11/29/2016-11-29-ES6-Generator-and-yield/)
+
 ES6 에서 추가된 `Generator` 는 `function*` 키워드로 사용할수 있다.
 
 보기엔 그냥 함수 같지만 일반 함수와는 전혀 다른 특성을 가지고 있다.
@@ -223,7 +225,7 @@ function* rootGenerator() {
 
 이밖에도 `Generator` 는 `Thread` 가 아니다 라는점을 강조하는 특징이 있는데
 
-이는 유니티나 C# 에서 사용 하는 `Coroutine` 과 유사한 개념이며 해당 영상에서는
+이는 유니티나 C# 에서 사용 하는 `Coroutine` 과 유사한 개념이며 해당 [영상](https://www.youtube.com/watch?v=QO07THdLWQo)에서는
 
 Promise framework 중에 하나인 `bluebird` 를 이용해 `Generator` 활용을 보여주고 있다.
 
