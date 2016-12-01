@@ -4,7 +4,7 @@ const
   path = require('path');
 
 module.exports = {
-  watrch: true,
+  watch: true,
   context: __dirname,
   entry: {
     "app": './src/main.js',
