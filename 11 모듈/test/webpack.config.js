@@ -4,7 +4,7 @@ const
   path = require('path');
 
 module.exports = {
-  watrch: true,
+  watch: true,
   context: __dirname,
   entry: {
     "app": './src/main.js',
@@ -21,8 +21,8 @@ module.exports = {
         exclude: /node_module/,
         loader: 'babel',
         query: {
-  				presets: ['es2015', 'stage-0']
-  			}
+  	  presets: ['es2015', 'stage-0']
+  	}
       }
     ]
   },
@@ -30,13 +30,13 @@ module.exports = {
     extensions: ['', '.js']
   },
   devServer: {
-		port: 3000,
+    port: 3000,
     contentBase: './build',
     historyApiFallback: true,
     hot: true,
     inline: true,
     progress: true
-	},
-	devtool: '#inline-source-map',
+  },
+  devtool: '#inline-source-map',
   debug: true
 }
