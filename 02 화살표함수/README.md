@@ -1,7 +1,7 @@
 # CH 2. 화살표 함수
 
 **화살표 함수의 장점**
-1. 일반 함수 구문에 비해 구문이 짧다
+* 일반 함수 구문에 비해 구문이 짧다
 ```js
 //일반 함수
   var normalFunction = function(x, y) {
@@ -12,7 +12,7 @@
   var arrowFunction = (x, y) => x + y;
 ```
 
-2. 동적 바인딩을 한다
+* 동적 바인딩을 한다
 ```js
   var outFunction = function(paramFunction) {paramFunction();}
 
