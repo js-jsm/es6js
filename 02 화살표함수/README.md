@@ -315,6 +315,19 @@ asyncFunc.catch(x => { throw x });
   // 결과값 : Uncaught TypeError: constructorArrowFunction is not a constructor(…)
 ```
 
+**use strict**
+```js
+function test(arg, arg) {console.log(arg)};
+test(1, 2); // 2
+
+"use strict";
+function test(arg, arg) {console.log(arg)};
+// Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+
+let test = (t, t) => {console.log(t);}
+// Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+```
+
 ```js
 // 각 강아지(puppy)가 가지고 놀 비어있는 객체 만들기
 var chewToys = puppies.map(puppy => {});   // BUG!
