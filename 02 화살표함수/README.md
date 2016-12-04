@@ -11,6 +11,7 @@
   //화살표 함수
   var arrowFunction = (x, y) => x + y;
 ```
+
 > 2. 동적 바인딩을 한다
 ```js
   var outFunction = function(paramFunction) {paramFunction();}
