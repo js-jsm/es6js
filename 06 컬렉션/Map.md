@@ -4,13 +4,13 @@
 
 > 삽입한 순서대로 정렬되며 맵 객체는 Map 생성자로 만든다.
 
-<br />
+
 ## 6-1-1. 기본 동작들
 
 ### 6-1-1-1. 생성자
 - `new Map()`을 이용해서 map을 생성
 - 이터러블한 파라미터를 제공하지 않으면 빈 맵이 생성된다.
-- `[['key', 'value'], ['key', 'value']]` 형태의 collection이나 iterable을 파라미터로 제공하여<br/> Map 생성자를 통해서 쉽게 map으로 변형할 수 있다.
+- `[['key', 'value'], ['key', 'value']]` 형태의 collection이나 iterable을 파라미터로 제공하여 Map 생성자를 통해서 쉽게 map으로 변형할 수 있다.
 
 ```js
 const map = new Map([
@@ -20,10 +20,9 @@ const map = new Map([
 ]);
 ```
 
-<br/>
 크롬 브라우저에서의 map 출력 결과의 모습
 
-![alt text](https://raw.githubusercontent.com/glassyi/simpleCode/master/img/map_dir.jpg "Map Object")
+> <img src="./map_console.png" alt="Map Object" style="width: 285px" />
 
 Map의 생성자는 내부적으로 아래와 같이 동작한다. forEach를 이용해서 key/value쌍을 하나씩 map에 할당해주고 있다.
 
@@ -37,29 +36,31 @@ let map = new Map();
 items.forEach(([key, value]) => map.set(key, value));
 ```
 
-<br/>
 ### 6-1-1-2. 개별 엔트리에 대한 제어
+
 #### 데이터 세팅
+
 - `map.set(key,value)`는 map 에 지정한 키에 지정한 값을 추가한다.
-  - 이미 키가 존재한다면 해당 키에 값을 업데이트하고,<br/>
-    존재하지 않는다면 새로운 엔트리를 생성한다 (`obj[key] = value`).
+  - 이미 키가 존재한다면 해당 키에 값을 업데이트하고, 존재하지 않는다면 새로운 엔트리를 생성한다 (`obj[key] = value`).
   - 이 메소드는 `this`를 리턴하므로, 메소드 체이닝이 가능하다.
+
 ```js
 let map = new Map();
 map.set(new Date(), function today () {});
 map.set(() => 'key', { pony: 'foo' });
 map.set(Symbol('items'), [1, 2]);
 ```
+
 ```js
 const map = new Map()
 .set(1, 'one')
 .set(2, 'two')
 .set(3, 'three');
 ```
-<br/>
-- `map.get(key)`를 사용해서 해당 key와 연관된 value 를 리턴한다.<br/>만약 그런 엔트리가 존재하지 않을 경우 `undefined`를 리턴한다. (`obj[key]` 구문처럼)
+
+- `map.get(key)`를 사용해서 해당 key와 연관된 value 를 리턴한다. 만약 그런 엔트리가 존재하지 않을 경우 `undefined`를 리턴한다. (`obj[key]` 구문처럼)
 - `map.has(key)`를 사용해서 해당 key가 map에 있는지 여부를 `boolean`값으로 리턴한다.
-- `map.delete(key)`를 사용해서 엔트리를 삭제한다. (`delete obj[key]` 구문처럼)<br/>맵에 해당 키가 존재하면 이를 삭제하면서 `true`를 반환하고, 존재하지 않는다면 `false`를 반환한다.
+- `map.delete(key)`를 사용해서 엔트리를 삭제한다. (`delete obj[key]` 구문처럼) 맵에 해당 키가 존재하면 이를 삭제하면서 `true`를 반환하고, 존재하지 않는다면 `false`를 반환한다.
 
 
 ```js
@@ -72,7 +73,6 @@ map.has('foo');         // false
 ```
 
 
-<br/>
 #### 키
 어떤 값이든 키가 될 수 있다.
 ```js
@@ -95,7 +95,7 @@ console.log([...map])
 ```
 
 
-ES6 Map에서 NaN은 corner-case가 된다. <br/>
+ES6 Map에서 NaN은 corner-case가 된다.
 `NaN`과 `NaN`을 동등하다고 판단하지 않는데
 맵의 key로 사용될 때는 동일하게 인식된다.
 
@@ -159,7 +159,7 @@ console.log([...map]);
 // <- [['p', 'o'], ['n', 'y'], ['f', 'o'], ['o', '!']]
 ```
 
-<br/>
+
 ### 6-1-1-3. 엔트리들에 대한 일괄 제어
 맵의 사이즈 결정 및 맵의 내용 제거
 
@@ -175,7 +175,7 @@ map.clear();
 map.size                // 0
 ```
 
-<br/>
+
 ### 6-1-1-4. 이터레이팅과 루프 동작
 
 #### Map의 이터레이팅
@@ -188,7 +188,7 @@ const map = new Map([
 
 맵은 각 요소가 삽입된 순서대로 요소들을 저장(기록)하며, 키나 값 또는 엔트리를 이터레이트할 때에도 이 순서에 따른다.
 
-<br/>
+
 #### 키와 값에 대한 이터러블
 - `map.keys()`와 `map.values()`는 각각 map의 모든 key와 value에 대한 이터러블을 반환한다.
 ```js
@@ -205,7 +205,7 @@ for (const value of map.values()) {
 // no
 // yes
 ```
-<br/>
+
 #### 엔트리에 대한 이터러블
 
 - `map.entries()`는 맵의 [키, 값] 쌍(배열)에 대한 이터러블로 맵의 엔트리들을 반환한다.
@@ -224,7 +224,7 @@ for (const entry of map.entries()) {
 ```js
 map[Symbol.iterator] === map.entries
 //true
-//맵 이터레이팅의 기본 방법은 entries()와 같다. 
+//맵 이터레이팅의 기본 방법은 entries()와 같다.
 ```
 - `[@@iterator]()` 사용하기.
 ```js
@@ -253,12 +253,12 @@ for (var v of myMap) {
 //[1, "bar"]
 //[Object, "baz"]
 ```
-<br/>
+
 #### 맵의 엔트리들에 대한 루프
 
 - `forEach()` 메소드나 `for..of` loop 를 사용하여 map의 엔트리를 순회한다.
 
-<br />
+
 맵의 `forEach`메소드는 다음과 같은 특징을 지닌다.
 ```js
 Map.prototype.forEach((value, key, map) => void[, thisArg])
@@ -269,8 +269,8 @@ Map.prototype.forEach((value, key, map) => void[, thisArg])
 	- the element key
 	- Map 객체
 
-<br/>
-`Array.prototype.forEach(callback)`의 콜백과 마찬가지로 
+
+`Array.prototype.forEach(callback)`의 콜백과 마찬가지로
 맵의 `forEach`메소드에 들어가는 콜백의 첫번째 argument가 value로 온다.
 ```js
 let map = new Map([
@@ -294,7 +294,7 @@ for (let [key, value] of map) {
   console.log(key, value)
 }
 ```
-<br/>
+
 #### 매핑 및 필터링
 배열에서는 map()이나 filter()을 할 수 있지만, 맵에는 이러한 명령어가 없다. 해결법은 다음과 같다.
 
@@ -323,7 +323,7 @@ const filteredMap = new Map( // step 3
 );
 // Resulting Map: {1 => 'a', 2 => 'b'}
 ```
-<br/>
+
 #### 맵의 결합
 여러 맵을 하나로 결합하기 위해, 각각의 맵을 펼침 연산자를 이용해 배열로 전환하고, 이 배열을 병합한다.
 그 다음, 이 결과를 다시 맵으로 전환한다.
@@ -343,7 +343,7 @@ const combinedMap = new Map([...map1, ...map2])
 [...combinedMap] // 펼침 연산자를 이용해 배열로 변환.
 // [[1,"a1"],[2,"b2"],[3,"c2"],[4, "d2"]]
 ```
-<br/>
+
 ___
 ## 6-1-2. 활용 예제
 
@@ -398,7 +398,7 @@ strMapToObj(myMap)
 objToStrMap({yes: true, no: false})
 // [['yes', true], ['no', false]]
 ```
-<br />
+
 위의 두 헬퍼 함수를 활용하면 JSON과의 형변환은 다음과 같이 동작한다.
 
 ```js
