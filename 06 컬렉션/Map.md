@@ -22,7 +22,7 @@ const map = new Map([
 
 크롬 브라우저에서의 map 출력 결과의 모습
 
-> <img src="./map_console.png" alt="Map Object" style="width: 285px" />
+![Map Object](./map_console.png)
 
 Map의 생성자는 내부적으로 아래와 같이 동작한다. forEach를 이용해서 key/value쌍을 하나씩 map에 할당해주고 있다.
 
