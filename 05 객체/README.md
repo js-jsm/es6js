@@ -161,7 +161,7 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 - - -
 
 
-## 5-2. 객체 초기자(Object initializer)
+## 5-2. 객체 초기자(Object initializer) (이후 추가 예정)
 
 객체는 new Object(), Object.create() 또는 literal 표기법 (initializer 표기법)을 사용하여 초기화 할 수 있습니다.
 > new Object(), Object.create(), Object Literal
@@ -169,7 +169,7 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 * ES5 & Object Initializer
 * ES6 & Object Initializer
 
-(이후 추가 예정)
+...
 
 
 - - -
@@ -205,18 +205,42 @@ console.log(Object.is(5, "5"));     // false
 종종 Object.is()는 일치 연산자(===)와 같은 역할을 합니다. 유일한 차이점은 + 0, -0이 동일하지 않은 것과 NaN가 NaN과 동일한 것으로 간주되는 것입니다. 그러나 동등 연산자와 일치 연사자의 사용을 완전히 중지 할 필요는 없습니다. 이러한 케이스가 코드에 미치는 영향에 따라 사용 여부를 선택하면 됩니다.
 
 
-### 5-3-2. Object.setPrototypeOf() 메소드
+### 5-3-2. Object.assign() 메소드 (이후 추가 예정)
+
+Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
+
+> 구문 : *Object.assign(target, ...sources)*
+
+소스 프로퍼티와 동일한 프로퍼티의 키를 가진 타켓 오브젝트의 프로퍼티들은 소스 오브젝트의 프로퍼티로 덮어쓰기 될 것입니다.
+
+```js
+var obj = { a: 1 };
+var copy = Object.assign({}, obj);
+console.log(copy); // { a: 1 }
+```
+
+* 유의사항
+
+- 소스의 getter, 타깃의 setter를 호출합니다.
+- 소스 프로퍼티 값을 타깃 객체의 새로운 또는 이미 존재하는 프로퍼티에 할당하는 기능이 전부 입니다.
+- 소스의 [[prototype]] 프로퍼티는 복사하지 않습니다(얕은복사).
+- 자바스크립트에서 프로퍼티명은 문자열 아니면 심볼인데 Object.assign()은 둘 다 복사합니다.
+- 소스의 프로퍼티 정의부는 복사되지 않으므로 필요 시 Object.getOwnPropertyDescriptor(), Object.defineProperty()를 대신 사용합니다.
+- null 또는 undefined의 값인 키는 반환하지 않습니다.
+
+...
+
+(참고)
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign]
+[https://leanpub.com/understandinges6/read/]
+
+
+### 5-3-3. Object.setPrototypeOf() 메소드 (이후 추가 예정)
 
 > 구문 : *Object.setPrototypeOf(object, prototype)*
 
-(이후 추가 예정)
+...
 
-
-### 5-3-3. Object.assign() 메소드
-
-> 구문 : *Object.assign(targetObj, sourceObjs...)*
-
-(이후 추가 예정)
 
 
 - - -
