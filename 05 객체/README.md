@@ -69,7 +69,7 @@ Object.getPrototypeOf(obj); // Object {name: "es6js"}
 -
 
 
-[[prototype]]는 다루기 까다로운 프로퍼티라서 일부 브라우저는 _ _ proto _ _라는 특별한 프로퍼티를 객체에 두어 밖에서도 접근할 수 있게 하고 덕분에 한결 프로토타입을 다루기 수월해졌다. 현재 대부분의 브라우저가 지원하고 있고 속성의 존재와 정확한 동작, 그리고 웹 브라우저 호환성을 확보하기 위해 레거시 기능으로 ECMAScript 6에서 표준화되었다.
+[[prototype]]는 다루기 까다로운 프로퍼티라서 일부 브라우저는 `__proto__`라는 특별한 프로퍼티를 객체에 두어 밖에서도 접근할 수 있게 하고 덕분에 한결 프로토타입을 다루기 수월해졌다. 현재 대부분의 브라우저가 지원하고 있고 속성의 존재와 정확한 동작, 그리고 웹 브라우저 호환성을 확보하기 위해 레거시 기능으로 ECMAScript 6에서 표준화되었다.
 
 ```js
 // es5
@@ -88,7 +88,7 @@ console.log(x.x); // 12
 console.log(x.y); // 13
 ```
 
-_ _ proto _ _속성은 오브젝트 설정, 오브젝트 리터럴 정의에 사용될 [[Prototype]] 대안이다.
+`__proto__`속성은 오브젝트 설정, 오브젝트 리터럴 정의에 사용될 [[Prototype]] 대안이다.
 
 ```js
 var shape = {};
@@ -110,8 +110,8 @@ shape.name; // es6js
 shape // Circle {}
 ```
 
-결국 Object.prototype을 참조하여 _ _ proto _ _으로 접근하여 속성을 찾는다. 그러나 Object.prototype 참조만 하고 접근을 한 뒤에는 속성을 찾을 수 없다.
-Object.prototype이 참조되기 전에 몇 가지 다른 _ _ proto _ _가 속성을 찾아낸 후, 그 속성은 Object.prototype 위에서 찾아낸 속성의 기능을 하지 않는다.
+결국 Object.prototype을 참조하여 `__proto__`으로 접근하여 속성을 찾는다. 그러나 Object.prototype 참조만 하고 접근을 한 뒤에는 속성을 찾을 수 없다.
+Object.prototype이 참조되기 전에 몇 가지 다른 `__proto__`가 속성을 찾아낸 후, 그 속성은 Object.prototype 위에서 찾아낸 속성의 기능을 하지 않는다.
 
 ```js
 var noProto = Object.create({a:10}); // 객체 또는 null 값
@@ -125,7 +125,7 @@ console.log(noProto.__proto__); // 17
 console.log(Object.getPrototypeOf(noProto)); // null
 ```
 
-### _ _ proto _ _와 prototype 테스트
+### `__proto__`와 prototype 테스트
 
 ```js
 // 생성자로 사용할 함수 선언
@@ -154,10 +154,10 @@ fred.__proto__ === Employee.prototype; // false
 fred.__proto__ === Cow.prototype; // true
 ```
 
-fred 인스턴스는 Employee를 상속하고 있는 상태에서 다른 개체 fred._ _ proto _ _를 할당하여 변경하게 되면,
+fred 인스턴스는 Employee를 상속하고 있는 상태에서 다른 개체 fred.`__proto__`를 할당하여 변경하게 되면,
 fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee.prototype에서 원래 상속 된 속성을 잃게 된다.
 
-
+- - -
 
 ## 5-2. 객체 초기자(Object initializer)
 
@@ -167,11 +167,15 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 * ES5 & Object Initializer
 * ES6 & Object Initializer
 
+(이후 추가 예정)
 
+- - -
 
-## 5-3. 추가된 메소드
+## 5-3. 추가된 메소드 
 
-* Object.is () 메서드
+### 5-3-1. Object.is() 메소드
+
+> 구문 : *Object.is(value1, value2)*
 
 자바 스크립트에서 두 값을 비교하려면 동등 연산자(==) 또는 일치 연산자(===) 중 하나를 사용하는 것이 보통입니다. 많은 개발자들은 비교시 강제 형변환을 피하기 위해 후자를 선호합니다. 그러나 일치 연산자(===)도 완전히 정확하지는 않습니다. 예를 들어, 값이 +0과 -0은 JavaScript 엔진에서 다르게 표현되어 있어도 동일한 것으로 간주됩니다. 또한 NaN === NaN false를 반환합니다. 따라서 NaN를 제대로 감지하기 위해 isNaN()을 사용해야합니다.
 
@@ -196,17 +200,26 @@ console.log(Object.is(5, "5"));     // false
 
 종종 Object.is()는 일치 연산자(===)와 같은 역할을 합니다. 유일한 차이점은 + 0, -0이 동일하지 않은 것과 NaN가 NaN과 동일한 것으로 간주되는 것입니다. 그러나 동등 연산자와 일치 연사자의 사용을 완전히 중지 할 필요는 없습니다. 이러한 케이스가 코드에 미치는 영향에 따라 사용 여부를 선택하면 됩니다.
 
+
+(이후 추가 예정)
+
+### 5-3-2. Object.setPrototypeOf() 메소드
+
+> 구문 : *Object.setPrototypeOf(object, prototype)*
+
+### 5-3-3. Object.assign() 메소드
+
+> 구문 : *Object.assign(targetObj, sourceObjs...)*
+
 - - -
 
+## 5-4. Etc
 
+### 5-4-1. getter, setter
 
-## Etc
+`__proto__`속성은 getter와 setter 함수로 Object.prototype에 쉽게 접근할 수 있다.
 
-### getter, setter
-
-_ _ proto _ _속성은 getter와 setter 함수로 Object.prototype에 쉽게 접근할 수 있다.
-
-getter는 특정 속성 값을 얻는 방법이고, setter 특정 속성 값을 설정하는 방법이다. 당신은 새로운 속성의 추가를 지원하는 미리 정의 된 핵심 개체 또는 사용자 정의 개체에 getter와 setter를 정의 할 수 있습니다. 정의 getter와 setter의 구문은 객체 리터럴 구문을 사용합니다.
+getter는 특정 속성 값을 얻는 방법이고, setter 특정 속성 값을 설정하는 방법이다. 당신은 새로운 속성의 추가를 지원하는 미리 정의된 핵심 개체 또는 사용자 정의 개체에 getter와 setter를 정의 할 수 있습니다. 정의 getter와 setter의 구문은 객체 리터럴 구문을 사용합니다.
 
 > 주의 : 이전에 Object.isExtensible() 메소드로 객체가 확장 가능한지(객체에 새 속성을 추가할 수 있는지 여부)를 확인해야 한다.
 확장 가능하지 않을 경우에는 TypeError가 발생된다.
