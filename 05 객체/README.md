@@ -159,6 +159,43 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 
 
 
+## 5-2. 객체 초기자(Object initializer)
+
+객체는 new Object(), Object.create() 또는 literal 표기법 (initializer 표기법)을 사용하여 초기화 할 수 있습니다.
+> new Object(), Object.create(), Object Literal
+
+* ES5 & Object Initializer
+* ES6 & Object Initializer
+
+
+
+## 5-3. 추가된 메소드
+
+* Object.is () 메서드
+
+자바 스크립트에서 두 값을 비교하려면 동등 연산자(==) 또는 일치 연산자(===) 중 하나를 사용하는 것이 보통입니다. 많은 개발자들은 비교시 강제 형변환을 피하기 위해 후자를 선호합니다. 그러나 일치 연산자(===)도 완전히 정확하지는 않습니다. 예를 들어, 값이 +0과 -0은 JavaScript 엔진에서 다르게 표현되어 있어도 동일한 것으로 간주됩니다. 또한 NaN === NaN false를 반환합니다. 따라서 NaN를 제대로 감지하기 위해 isNaN()을 사용해야합니다.
+
+ES6에서는 Object.is() 메소드가 도입되었으며 동일하게 동등 연산자의 단점을 보완합니다. 이 메소드는 2개의 인수를 받아, 값이 동일한 경우는 true를 돌려줍니다. 두 값이 같은 형태 같은 값을 가지는 경우 두 값은 같은 것으로 간주됩니다. 
+
+```js
+console.log(+0 == -0);              // true
+console.log(+0 === -0);             // true
+console.log(Object.is(+0, -0));     // false
+
+console.log(NaN == NaN);            // false
+console.log(NaN === NaN);           // false
+console.log(Object.is(NaN, NaN));   // true
+
+console.log(5 == 5);                // true
+console.log(5 == "5");              // true
+console.log(5 === 5);               // true
+console.log(5 === "5");             // false
+console.log(Object.is(5, 5));       // true
+console.log(Object.is(5, "5"));     // false
+```
+
+종종 Object.is()는 일치 연산자(===)와 같은 역할을 합니다. 유일한 차이점은 + 0, -0이 동일하지 않은 것과 NaN가 NaN과 동일한 것으로 간주되는 것입니다. 그러나 동등 연산자와 일치 연사자의 사용을 완전히 중지 할 필요는 없습니다. 이러한 케이스가 코드에 미치는 영향에 따라 사용 여부를 선택하면 됩니다.
+
 - - -
 
 
@@ -286,5 +323,4 @@ writable이 true로 설정되면 할당연산자assignment operator를 통해 �
 
 + 추가 할 내용 +
 
-1. 단축 속성 : [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer]
-2. 추가 된 메소드
+1. 단축 속성 : [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer, http://mohwa.github.io/blog/javascript/2016/04/21/es6-object-literal/]
