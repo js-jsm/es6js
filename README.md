@@ -71,7 +71,7 @@
   3. [Spread Operator](./03%20다중%20변수%20및%20인자%20제어/3-3_Spread%20Operator.md)
   4. [Destructuring Assignment](./03%20다중%20변수%20및%20인자%20제어/3-4_Destructuring.md)
 
-### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `봉재 in progress`
+### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `태산 in progress`
   + String
   + Template Literal &amp; Tagged Template
   + Unicode
