@@ -418,3 +418,39 @@ strMapToJson(myMap)
 jsonToStrMap('{"yes":true,"no":false}');
 // Map {'yes' => true, 'no' => false}
 ```
+#### 새로운 맵의 구성
+일반적으로 JSON으로 들어 와서 드롭 다운이나 리스트로 웹 페이지에 표시되는 객체 구조의 모습.<br />
+RPG 게임에서 다음과 같은 콜렉션을 예를 들 수 있다.
+```js
+var charSet = {
+
+aler102:{id:"aler102", name:"Aleria", gender:"female",vocation:"mage",species:"half-elf"},
+
+thor319:{id:"thor312", name:"Thor", gender:"male",vocation:"warrior",species:"half-orc"},
+
+rean831:{id:"rean831", name:"Reanna", gender:"female",vocation:"monk",species:"human"},
+
+gunt615:{id:"gunt615", name:"Gunther", gender:"male",vocation:"smith",species:"human"},
+
+ness789:{id:"ness789", name:"Nessa", gender:"female",vocation:"mage",species:"human"}
+
+}
+```
+
+forEach () 함수를 사용하여 이러한 레코드를 빠르게 정렬하고 <br />
+캐릭터가 여성 마법사 인 레코드만으로 구성된 새 맵을 만들 수 있습니다
+```js
+var charMap = new Map();
+Object.keys(charSet).forEach((key)=> charMap.set(key,charSet[key]));
+
+var targetMap = new Map();
+
+charMap.forEach((entry,key)=> {
+    if(entry.gender=="female" && entry.vocation=="mage"){
+        targetMap.set(key,Object.create(entry))
+    }
+    //여기서 Object.create () 함수는 객체를 가져 와서 복사본을 만듭니다.
+});
+
+console.log(targetMap);
+```
