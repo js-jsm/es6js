@@ -157,7 +157,9 @@ fred.__proto__ === Cow.prototype; // true
 fred 인스턴스는 Employee를 상속하고 있는 상태에서 다른 개체 fred.`__proto__`를 할당하여 변경하게 되면,
 fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee.prototype에서 원래 상속 된 속성을 잃게 된다.
 
+
 - - -
+
 
 ## 5-2. 객체 초기자(Object initializer)
 
@@ -169,7 +171,9 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 
 (이후 추가 예정)
 
+
 - - -
+
 
 ## 5-3. 추가된 메소드 
 
@@ -201,17 +205,22 @@ console.log(Object.is(5, "5"));     // false
 종종 Object.is()는 일치 연산자(===)와 같은 역할을 합니다. 유일한 차이점은 + 0, -0이 동일하지 않은 것과 NaN가 NaN과 동일한 것으로 간주되는 것입니다. 그러나 동등 연산자와 일치 연사자의 사용을 완전히 중지 할 필요는 없습니다. 이러한 케이스가 코드에 미치는 영향에 따라 사용 여부를 선택하면 됩니다.
 
 
-(이후 추가 예정)
-
 ### 5-3-2. Object.setPrototypeOf() 메소드
 
 > 구문 : *Object.setPrototypeOf(object, prototype)*
+
+(이후 추가 예정)
+
 
 ### 5-3-3. Object.assign() 메소드
 
 > 구문 : *Object.assign(targetObj, sourceObjs...)*
 
+(이후 추가 예정)
+
+
 - - -
+
 
 ## 5-4. Etc
 
