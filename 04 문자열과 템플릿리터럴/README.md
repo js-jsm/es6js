@@ -76,10 +76,6 @@ back-tic key (키보드 숫자 1키 좌측에 위치)를 사용하여 시작하�
         new line
     `;
     
-    multiStrNew.indexOf('\n')
-    0
-    multiStrNew.lastIndexOf('\n')
-    32
 ```
 
 ES6의 템플릿 리터럴은 라인 개행을 자동으로 진행해 줍니다.  
