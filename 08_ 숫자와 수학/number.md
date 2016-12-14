@@ -86,7 +86,7 @@ console.log(Object.is(0, -0)); // false
 속도나 방향 등등의 정보를 잃게될 것이다.  
 
 > There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
-In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.`
+In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
 
 ## Number object
 ### Structure
@@ -118,7 +118,7 @@ console.log(Number.EPSILON); // 2.220446049250313e-16
 ```javascript
 console.log(Number.POSITIVE_INFINITY === Infinity); // true
 console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
-console.log(Number.isNaN(Number.NaN)); // true
+console.log(isNaN(Number.NaN)); // true
 ```
 
 #### [Number.MIN_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_VALUE) & [Number.MAX_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_VALUE)
@@ -179,7 +179,7 @@ console.log(Number.EPSILON.toFixed(20)); // 0.00000000000000022204
  * 0.00000000000000004
  * 0.00000000000000022204
  */
-console.log(0.0000000000000004 < Number.EPSILON)
+console.log(0.0000000000000004 < Number.EPSILON); // true
 ```
 
 즉 좌변에 있는 값이 우변에 있는 Number.EPSILON 보다도 작다면 무시해도 되는 오차다.  
@@ -202,7 +202,7 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 Number.prototype.lastNum = function() {
   return this % 10;
 };
-console.log(new Number(12).lastNum()); // 2
+console.log(12.0.lastNum()); // 2
 ```
 
 ### Methods
@@ -219,7 +219,7 @@ console.log(new Number(12).lastNum()); // 2
 * [Number.prototype.valueOf()](#numberprototypevalueof)
 * [Number.prototype.toLocaleString()](#numberprototypetolocalestring)
 
-메소드는 수정 가능하다.
+메소드는 수정 가능하다.  
 수정 가능하기 때문에 폴리필도 제작 가능하다.
 ```javascript
 Number.isFinite = () => "a";
@@ -366,7 +366,7 @@ Number.parseInt(string[, radix])
 
 ###### Parameters
 * string: 문자열  
-* radix: 2~36진, 10이 기본값.
+* radix: 2~36진수, 10이 기본값.
 
 ###### Example
 ```javascript
@@ -679,6 +679,11 @@ for(let i=0; i<iterations; i++){
     Number.parseInt("1.1"); // Number.parseInt(): 561.062ms
 }
 console.timeEnd("Number.parseInt()");
+console.time("Number.parseInt() with radix");
+for(let i=0; i<iterations; i++){
+    Number.parseInt("1.1", 10); // Number.parseInt() with radix: 511.062ms
+}
+console.timeEnd("Number.parseInt() with radix");
 console.time("Number.parseFloat()");
 for(let i=0; i<iterations; i++){
     Number.parseFloat("1.1"); // Number.parseFloat(): 737.437ms
@@ -708,7 +713,6 @@ console.timeEnd("1*string");
 
 ## Number to String
 * Number.prototype.toString()
-* new Number().toString()
 * String(number)
 * "" + number
 
@@ -752,7 +756,7 @@ console.time("Number.prototype.toString()");
 for(let i=0; i<iterations; i++){
     1.1.toString(); // Number.prototype.toString(): 268.619ms
 }
-console.timeEnd("new Number().toString()");
+console.timeEnd("Number.prototype.toString()");
 console.time("String(number)");
 for(let i=0; i<iterations; i++){
     String(1.1); // String(): 159.045ms
