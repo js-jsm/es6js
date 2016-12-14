@@ -1,12 +1,12 @@
 # Number
 * [Number type(Primitive value)](#number-typeprimitive-value)    
-  * [Number object(Wrapper object)](#number-objectwrapper-object) 
-    * [Properties](#properties)  
-    * [Methods](#methods)
-  * [Number functions](#number-functions)  
-    * [As function](#as-function)  
-    * [As constructor](#as-constructor)
-  * [Number ↔ String](#number--string)  
+* [Number object(Wrapper object)](#number-objectwrapper-object) 
+  * [Properties](#properties)  
+  * [Methods](#methods)
+* [Number functions](#number-functions)  
+  * [As function](#as-function)  
+  * [As constructor](#as-constructor)
+* [Number ↔ String](#number--string)  
 
 ## Number type(Primitive value)
 ES에서 숫자형은 단 하나의 자료형 뿐이다.  
