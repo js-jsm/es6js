@@ -1,6 +1,6 @@
 # Number
 * [Number type(Primitive values)](#number-typeprimitive-values)    
-  * [Number object](#number-object)  
+  * [Number object(Wrapper object)](#number-objectwrapper-object) 
     * [Properties](#properties)  
     * [Methods](#methods)
   * [Number functions](#number-functions)  
@@ -88,7 +88,11 @@ console.log(Object.is(0, -0)); // false
 > There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
 In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
 
-## Number object
+## Number object(Wrpper object)
+[래퍼 객체, wrapper objects](http://noritersand.tistory.com/536)
+래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이다.  
+래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다.
+
 ### Structure
 ```javascript
 console.dir(Number);
@@ -566,10 +570,11 @@ const objNum = new Number(11);
 console.log(objNum.__proto__ === Number.prototype); // true
 ```
 
-ECMAScript 명세서에 의하면 프로토타입 프로퍼티를 [[Prototype]]이라고 표현하고 있지만 크롬에서는 \_\_proto\_\_ 라는 프로퍼티로 구현하였다.  
 숫자의 래퍼 객체(Number)에서 미리 정의해놓은 프로퍼티(prototype)이다.  
 이 프로퍼티에는 숫자의 표준 메소드와 프로퍼티가 정의돼있다.  
-숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체로부터 프로토타입 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
+ECMAScript 명세서에 의하면 프로토타입 프로퍼티를 [[Prototype]]이라고 표현하고 있지만,  
+크롬에서는 \_\_proto\_\_ 라는 프로퍼티로 구현하였다.  
+숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체(Number)로부터 프로토타입 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
 
 #### Necessity
 [The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)  
