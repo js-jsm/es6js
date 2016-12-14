@@ -131,10 +131,10 @@ console.log(Math.ceil(-2.00001)); // -2
 #### [Math.floor(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor)
 무조건 소수점 첫째 자리에서 내림하여 정수를 반환.
 ```javascript
-console.log(Math.ceil(1)); // 1
-console.log(Math.ceil(1.00001)); // 1
-console.log(Math.ceil(-0)); // -0
-console.log(Math.ceil("-2.00001")); // -3
+console.log(Math.floor(1)); // 1
+console.log(Math.floor(1.90001)); // 1
+console.log(Math.floor(-0)); // -0
+console.log(Math.floor("-2.90001")); // -3
 ```
 
 #### [Math.round(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round)
