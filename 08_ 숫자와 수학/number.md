@@ -88,7 +88,7 @@ console.log(Object.is(0, -0)); // false
 > There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
 In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
 
-## Number object(Wrpper object)
+## Number object(Wrapper object)
 [래퍼 객체, wrapper objects](http://noritersand.tistory.com/536)
 래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이다.  
 래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다.
