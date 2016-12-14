@@ -1,7 +1,7 @@
 # Numeric Literals
 * [Binary Literal](#binary-literal)  
 * [Octal Literal](#octal-literal)  
-* [Hexadecimal](#hexadecimal)
+* [Hexadecimal Literal](#hexadecimal-literal)
 
 ## Binary Literal
 수학식: 11<sub>(2)</sub>  
@@ -49,7 +49,7 @@ console.log(0o71); // 57
 console.log(0O71); // 57
 ```
 
-## Hexadecimal
+## Hexadecimal Literal
 수학식: FF<sub>(16)</sub>  
 프로그래밍 언어: 0xFF, xFF, hFF, etc.
 
