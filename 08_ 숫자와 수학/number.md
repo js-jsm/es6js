@@ -1,5 +1,5 @@
 # Number
-* [Number type(Primitive values)](#number-typeprimitive-values)    
+* [Number type(Primitive value)](#number-typeprimitive-value)    
   * [Number object(Wrapper object)](#number-objectwrapper-object) 
     * [Properties](#properties)  
     * [Methods](#methods)
@@ -8,7 +8,7 @@
     * [As constructor](#as-constructor)
   * [Number ↔ String](#number--string)  
 
-## Number type(Primitive values)
+## Number type(Primitive value)
 ES에서 숫자형은 단 하나의 자료형 뿐이다.  
 Double: 자바나 C 등등의 언어에서 실수를 표현하기 위한 자료형, 8Byte = 64Bit  
 [Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)  
