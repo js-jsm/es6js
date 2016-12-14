@@ -5,8 +5,8 @@
 
 ## Math object
 Math object는 전역 공간에 존재하는 객체이다.  
-또한 Math 객체의 프로퍼티들과 메소드들은 상수이다.  
-하지만 새로운 프로퍼티와 메소드 생성은 가능하다.
+또한 Math 객체의 프로퍼티들은 상수이다.  
+하지만 새로운 프로퍼티 생성은 가능하다.
 ```javascript
 console.log(window.Math === Math); // true
 Math.E = 'asdf';
