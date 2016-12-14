@@ -41,7 +41,7 @@ ES5의 strict mode에서는 8진수 리터럴이 적용되지 않는다.
 > strict mode in ECMAScript 5 forbids octal syntax.
 Octal syntax isn't part of ECMAScript 5,
 but it's supported in all browsers by prefixing the octal number with a zero:
-0644 === 420 and "\045" === "%".`
+0644 === 420 and "\045" === "%".
 
 **in ES6**
 ```javascript
