@@ -1,1 +1,32 @@
-|  | 08 숫자와 수학                   | Number, Math
+# CH 8. Number and Math - `by 권성`
+## 목차
+* [Numeric Literals](numeric-literals.md)  
+  * [Binary Literal](numeric-literals.md#binary-literal)  
+  * [Octal Literal](numeric-literals.md#octal-literal)  
+  * [Hexadecimal](numeric-literals.md#hexadecimal)
+* [Number](number.md#number)  
+  * [Number type(Primitive values)](number.md#number-typeprimitive-values)    
+  * [Number object](number.md#number-object)  
+    * [Properties](number.md#properties)  
+    * [Methods](number.md#methods)
+  * [Number functions](number.md#number-functions)  
+    * [As function](number.md#as-function)  
+    * [As constructor](number.md#as-constructor)
+  * [Number ↔ String](number.md#number--string)    
+* [Math](math.md)
+  * [Math object](math.md#math-object)
+    * [Properties](math.md#properties)  
+    * [Methods](math.md#methods)
+
+## 참조 링크
+* [Double-precision 64-bit binary format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
+* [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)
+* [The JavaScript data structure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type)
+* [You Don't Know JS: Types & Grammar - Zeros](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#zeros)  
+* [The JavaScript global object Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+* [Wrapper Objects for Primitives](http://speakingjs.com/es5/ch08.html#wrapper_objects)
+* [The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)
+* [ES6 Number Improvements in Depth](https://ponyfoo.com/articles/es6-number-improvements-in-depth)  
+* [New number and Math features](http://exploringjs.com/es6/ch_numbers.html)
+* [수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)  
+* [부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
