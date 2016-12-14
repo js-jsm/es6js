@@ -3,7 +3,7 @@
 * [Numeric Literals](numeric-literals.md)  
   * [Binary Literal](numeric-literals.md#binary-literal)  
   * [Octal Literal](numeric-literals.md#octal-literal)  
-  * [Hexadecimal](numeric-literals.md#hexadecimal)
+  * [Hexadecimal Literal](numeric-literals.md#hexadecimal-literal)
 * [Number](number.md#number)  
   * [Number type(Primitive values)](number.md#number-typeprimitive-values)    
   * [Number object](number.md#number-object)  
