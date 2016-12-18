@@ -10,15 +10,15 @@
 
 ## 리뷰 일지
 - 16.12.18
-  - 유리
-  - 권성
-  - 재남
+  - 유리 : [06 컬렉션](/06%20%EC%BB%AC%EB%A0%89%EC%85%98/README.md)
+  - 권성 : [08 숫자와 수학](/08%20%EC%88%AB%EC%9E%90%EC%99%80%20%EC%88%98%ED%95%99/README.md)
+  - 재남 : [15 프라미스](/15%20프라미스/README.md)
   - (명기)
 
 - 16.12.11
   - 지혜 : [01 블록변수와 블록스코프 및 함수](/01%20블록변수와%20블록스코프%20및%20함수/1-1_Block%20Variable.md)
   - 태산 : [04 문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴/README.md)
-  - 소라 : [05 객체](https://github.com/js-jsm/es6js/blob/master/05%20%EA%B0%9D%EC%B2%B4/README.md)
+  - 소라 : [05 객체](/05%20%EA%B0%9D%EC%B2%B4/README.md)
 
 - 16.12.04
   - 희경 : [02 화살표함수](/02%20화살표함수/README.md)
@@ -32,8 +32,8 @@
 
 - 16.11.20
   - 봉재 : [04 문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴/README.md)
-  - 소라 : [05 객체](https://github.com/js-jsm/es6js/blob/master/05%20%EA%B0%9D%EC%B2%B4/README.md)
-  - 유리 : [06 컬렉션](https://github.com/js-jsm/es6js/blob/master/06%20%EC%BB%AC%EB%A0%89%EC%85%98/README.md)
+  - 소라 : [05 객체](/05%20%EA%B0%9D%EC%B2%B4/README.md)
+  - 유리 : [06 컬렉션](/06%20%EC%BB%AC%EB%A0%89%EC%85%98/README.md)
 
 - 16.11.13
   - 명기 : [11 모듈](/11%20모듈/README.md)
@@ -98,7 +98,7 @@
 ### 07 [심볼](/07%20심볼) `태산 done`
   + Symbol
 
-### 08 [숫자와 수학](/08%20숫자와%20수학) `권성 in progress`
+### 08 [숫자와 수학](/08%20숫자와%20수학) `권성 done`
   + Binary Literal &amp; Octal Literal
   + Number
   + Math
@@ -115,12 +115,12 @@
 ### 12 [클래스](/12%20클래스) `재남 done`
   + Class
 
-### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터) `원준 in progress`
+### 13 [이터러블과 이터레이터](/13%20이터러블과%20이터레이터) `원준 done`
   + for of
   + iterable
   + iterator
 
-### 14 [제너레이터](/14%20제너레이터)
+### 14 [제너레이터](/14%20제너레이터) `원준 in progress`
   + generator
   + yield
 
