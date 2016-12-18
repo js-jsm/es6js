@@ -61,6 +61,9 @@
   - 재남 : [03 다중 변수 및 인자 제어](/03%20다중%20변수%20및%20인자%20제어/README.md)
 
 
+
+
+
 ## 목차
 
 ### 01 [블록변수와 블록스코프 및 함수](/01%20블록변수와%20블록스코프%20및%20함수) `지혜 in progress`
@@ -78,7 +81,7 @@
   3. [Spread Operator](./03%20다중%20변수%20및%20인자%20제어/3-3_Spread%20Operator.md)
   4. [Destructuring Assignment](./03%20다중%20변수%20및%20인자%20제어/3-4_Destructuring.md)
 
-### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `봉재 in progress`
+### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `태산 in progress`
   + String
   + Template Literal &amp; Tagged Template
   + Unicode
@@ -95,7 +98,7 @@
 ### 07 [심볼](/07%20심볼) `태산 done`
   + Symbol
 
-### 08 [숫자와 수학](/08%20숫자와%20수학)
+### 08 [숫자와 수학](/08%20숫자와%20수학) `권성 in progress`
   + Binary Literal &amp; Octal Literal
   + Number
   + Math
@@ -121,7 +124,7 @@
   + generator
   + yield
 
-### 15 [프라미스](/15%20프라미스)
+### 15 [프라미스](/15%20프라미스) `재남 in progress`
   + promise
 
 ### 16 [프록시](/16%20프록시)
