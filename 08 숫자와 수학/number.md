@@ -1,6 +1,6 @@
 # Number
 * [Number type(Primitive value)](#number-typeprimitive-value)    
-* [Number object(Wrapper object)](#number-objectwrapper-object) 
+* [Number object(global object)](#number-objectglobal-object) 
   * [Properties](#properties)  
   * [Methods](#methods)
 * [Number functions](#number-functions)  
@@ -88,10 +88,12 @@ console.log(Object.is(0, -0)); // false
 > There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
 In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
 
-## Number object(Wrapper object)
-[래퍼 객체, wrapper objects](http://noritersand.tistory.com/536)  
-래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이다.  
-래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다.
+## Number object(Global object)
+ES5까지 Number 객체는 거의 [래퍼 객체](http://noritersand.tistory.com/536)의 역할만을 수행했다.  
+하지만 ES6에 들어서면서 다양한 프로퍼티와 메소드들이 생기면서  
+래퍼 객체 이상의 역할을 수행하는 전역 객체와 같이 쓸 수 있게 되었다.  
+래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이며,  
+래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다. 
 
 ### Structure
 ```javascript
