@@ -154,7 +154,7 @@ console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // tru
 ##### Polyfill
 ```javascript
 if(!Number.MIN_SAFE_INTEGER) {
-  if(!Object.defineProperty) { // in ES3
+  if(!Object.create) { // in ES3
     Number.MIN_SAFE_INTEGER = -(Math.pow(2, 53) - 1);
   } else { // in ES5
     Object.defineProperty(Number, "MIN_SAFE_INTEGER", {
@@ -163,7 +163,7 @@ if(!Number.MIN_SAFE_INTEGER) {
   }
 }
 if(!Number.MAX_SAFE_INTEGER) {
-  if(!Object.defineProperty) { // in ES3
+  if(!Object.create) { // in ES3
     Number.MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
   } else { // in ES5
     Object.defineProperty(Number, "MAX_SAFE_INTEGER", {
@@ -237,7 +237,7 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 ##### Polyfill
 ```javascript
 if(!Number.EPSILON) {
-  if(!Object.defineProperty) { // in ES3
+  if(!Object.create) { // in ES3
     Number.EPSILON = 2.220446049250313e-16;
   } else { // in ES5
     Object.defineProperty(Number, "EPSILON", {
