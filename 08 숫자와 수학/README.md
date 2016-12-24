@@ -6,7 +6,7 @@
   * [Hexadecimal Literal](numeric-literals.md#hexadecimal-literal)
 * [Number](number.md)  
   * [Number type(Primitive value)](number.md#number-typeprimitive-value)    
-  * [Number object(Wrapper object)](number.md#number-objectwrapper-object)  
+  * [Number object(Global object)](number.md#number-objectglobal-object)  
     * [Properties](number.md#properties)  
     * [Methods](number.md#methods)
   * [Number functions](number.md#number-functions)  
