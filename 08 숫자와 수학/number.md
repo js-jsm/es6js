@@ -158,11 +158,24 @@ console.log(.1 + .2); // 0.30000000000000004
 console.log(0.1 + 0.2 === 0.3); // false
 ```
 ES에서는 위와 같이 소수점 계산에서 고질적인 문제를 안고 있다.  
-이는 아마 [ES에서 쓰이는 엔진의 문제](http://speakingjs.com/es5/ch11.html#rounding_errors)라고 보여진다.  
-[decimal64 floating-point format](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
-> JavaScript’s numbers are usually entered as decimal floating-point numbers,
+이는 아마 [IEEE에서 제정한 부동소수점 표현 형식인 IEE754의 고질적인 문제](https://ko.wikipedia.org/wiki/IEEE_754)라고 보여진다.  
+[실수 표현 문제 발생 이유 or 오차 발생 이유](http://karmainearth.tistory.com/143)
+> 자바스크립트의 숫자는 십진 부동 소수점 숫자로 접근하는데 반해  
+  그 내부 동작 원리는 이진 부동 소수점 숫자이기 때문에 오차가 발생한다.  
+> [원문 보기](http://speakingjs.com/es5/ch11.html#rounding_errors)
+JavaScript’s numbers are usually entered as decimal floating-point numbers,
 but they are internally represented as binary floating-point numbers.
 That leads to imprecision.
+
+위와 같은 문제는 IEE754를 사용하는 Java에서도 동일하게 발생한다.
+```java
+public class test {
+    public static void main(String[] args) {
+        System.out.println(0.1 + 0.2);      // 0.30000000000000004
+        System.out.println(0.3 == 0.1+0.2); // false
+    }
+}
+```
 
 어찌보면 0.00000000000000004 정도의 오차는 무시되도 되는 작은 숫자이다.  
 
@@ -564,17 +577,16 @@ console.dir(objNum);
 ```
 ![Number Constructor Structure](imgs/number-constructor.png)
 
-#### [[Prototype]]
+#### \_\_proto\_\_
 ```javascript
 const objNum = new Number(11);
-console.log(objNum.__proto__ === Number.prototype); // true
+console.log(Number.prototype === objNum.__proto__); // true
 ```
 
 숫자의 래퍼 객체(Number)에서 미리 정의해놓은 프로퍼티(prototype)이다.  
 이 프로퍼티에는 숫자의 표준 메소드와 프로퍼티가 정의돼있다.  
-ECMAScript 명세서에 의하면 프로토타입 프로퍼티를 [[Prototype]]이라고 표현하고 있지만,  
-크롬에서는 \_\_proto\_\_ 라는 프로퍼티로 구현하였다.  
-숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체(Number)로부터 프로토타입 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
+숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체(Number)로부터  
+prototype 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
 
 #### Necessity
 [The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)  
@@ -606,7 +618,7 @@ const div = num1 / num2; // 1
 * Number.parseFloat(string)
 * new Number(string).valueOf()
 * Number()
-* +object, 1*object
+* +string, 1*string
 
 ### Number.parseInt(str[, radix])
 ```javascript
