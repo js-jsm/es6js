@@ -1,6 +1,6 @@
 # Number
 * [Number type(Primitive value)](#number-typeprimitive-value)    
-* [Number object(global object)](#number-objectglobal-object) 
+* [Number object(Global object)](#number-objectglobal-object) 
   * [Properties](#properties)  
   * [Methods](#methods)
 * [Number functions](#number-functions)  
