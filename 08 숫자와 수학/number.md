@@ -114,7 +114,6 @@ console.dir(Number);
 
 표준 프로퍼티들은 상수이다.  
 즉 변경이 불가능하다.  
-변경이 불가능하기 때문에 폴리필이 존재하지 않는다.
 ```javascript
 Number.EPSILON = "asdf"; // 오류는 나지 않는다.
 console.log(Number.EPSILON); // 2.220446049250313e-16
@@ -151,6 +150,27 @@ console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
 console.log(Math.pow(2, 53) - 1); // 9007199254740991
 console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
+```  
+##### Polyfill
+```javascript
+if(!Number.MIN_SAFE_INTEGER) {
+  if(!Object.defineProperty) { // in ES3
+    Number.MIN_SAFE_INTEGER = -(Math.pow(2, 53) - 1);
+  } else { // in ES5
+    Object.defineProperty(Number, "MIN_SAFE_INTEGER", {
+      value: -(Math.pow(2, 53) - 1)
+    });
+  }
+}
+if(!Number.MAX_SAFE_INTEGER) {
+  if(!Object.defineProperty) { // in ES3
+    Number.MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+  } else { // in ES5
+    Object.defineProperty(Number, "MAX_SAFE_INTEGER", {
+      value: Math.pow(2, 53) - 1
+    });
+  }
+}
 ```
 
 #### [Number.EPSILON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON) `*`
@@ -214,6 +234,19 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.1)); // true
 console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 ```
 
+##### Polyfill
+```javascript
+if(!Number.EPSILON) {
+  if(!Object.defineProperty) { // in ES3
+    Number.EPSILON = 2.220446049250313e-16;
+  } else { // in ES5
+    Object.defineProperty(Number, "EPSILON", {
+      value: 2.220446049250313e-16
+    });
+  }
+}
+```
+
 #### [Number.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/prototype)
 숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
 표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다.
@@ -239,7 +272,6 @@ console.log(12.0.lastNum()); // 2
 * [Number.prototype.toLocaleString()](#numberprototypetolocalestring)
 
 메소드는 수정 가능하다.  
-수정 가능하기 때문에 폴리필도 제작 가능하다.
 ```javascript
 Number.isFinite = () => "a";
 console.log(Number.isFinite(123)); // "a"
