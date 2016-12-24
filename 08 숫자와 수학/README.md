@@ -30,4 +30,5 @@
 * [ES6 Number Improvements in Depth](https://ponyfoo.com/articles/es6-number-improvements-in-depth)  
 * [New number and Math features](http://exploringjs.com/es6/ch_numbers.html)
 * [수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)  
-* [부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
+* [부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)  
+* [실수 표현 문제 발생 이유 or 오차 발생 이유](http://karmainearth.tistory.com/143)
