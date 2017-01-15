@@ -86,7 +86,7 @@
   3. [Spread Operator](./03%20다중%20변수%20및%20인자%20제어/3-3_Spread%20Operator.md)
   4. [Destructuring Assignment](./03%20다중%20변수%20및%20인자%20제어/3-4_Destructuring.md)
 
-### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `태산 in progress`
+### 04 [문자열과 템플릿리터럴](/04%20문자열과%20템플릿리터럴) `태산 in done`
   + String
   + Template Literal &amp; Tagged Template
   + Unicode
@@ -132,10 +132,10 @@
 ### 15 [프라미스](/15%20프라미스) `재남 in progress`
   + promise
 
-### 16 [프록시](/16%20프록시)
+### 16 [프록시](/16%20프록시) 
   + proxy
 
-### 17 [리플렉션](/17%20리플렉션)
+### 17 [리플렉션](/17%20리플렉션) `태산 in progress`
   + relection
 
 ### 18 [정규표현식](/18%20정규표현식)

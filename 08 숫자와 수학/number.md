@@ -1,6 +1,6 @@
 # Number
 * [Number type(Primitive value)](#number-typeprimitive-value)    
-* [Number object(Wrapper object)](#number-objectwrapper-object) 
+* [Number object(Global object)](#number-objectglobal-object) 
   * [Properties](#properties)  
   * [Methods](#methods)
 * [Number functions](#number-functions)  
@@ -88,10 +88,12 @@ console.log(Object.is(0, -0)); // false
 > There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
 In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
 
-## Number object(Wrapper object)
-[래퍼 객체, wrapper objects](http://noritersand.tistory.com/536)  
-래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이다.  
-래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다.
+## Number object(Global object)
+ES5까지 Number 객체는 거의 [래퍼 객체](http://noritersand.tistory.com/536)의 역할만을 수행했다.  
+하지만 ES6에 들어서면서 다양한 프로퍼티와 메소드들이 생기면서  
+래퍼 객체 이상의 역할을 수행하는 전역 객체와 같이 쓸 수 있게 되었다.  
+래퍼 객체는 원시 타입의 값을 객체로 다루기 위한 객체이며,  
+래퍼 객체의 진가는 prototype 프로퍼티를 통해 드러나게 된다. 
 
 ### Structure
 ```javascript
@@ -112,7 +114,6 @@ console.dir(Number);
 
 표준 프로퍼티들은 상수이다.  
 즉 변경이 불가능하다.  
-변경이 불가능하기 때문에 폴리필이 존재하지 않는다.
 ```javascript
 Number.EPSILON = "asdf"; // 오류는 나지 않는다.
 console.log(Number.EPSILON); // 2.220446049250313e-16
@@ -149,6 +150,27 @@ console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
 console.log(Math.pow(2, 53) - 1); // 9007199254740991
 console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
+```  
+##### Polyfill
+```javascript
+if(!Number.MIN_SAFE_INTEGER) {
+  if(!Object.create) { // in ES3
+    Number.MIN_SAFE_INTEGER = -(Math.pow(2, 53) - 1);
+  } else { // in ES5
+    Object.defineProperty(Number, "MIN_SAFE_INTEGER", {
+      value: -(Math.pow(2, 53) - 1)
+    });
+  }
+}
+if(!Number.MAX_SAFE_INTEGER) {
+  if(!Object.create) { // in ES3
+    Number.MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+  } else { // in ES5
+    Object.defineProperty(Number, "MAX_SAFE_INTEGER", {
+      value: Math.pow(2, 53) - 1
+    });
+  }
+}
 ```
 
 #### [Number.EPSILON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON) `*`
@@ -158,11 +180,24 @@ console.log(.1 + .2); // 0.30000000000000004
 console.log(0.1 + 0.2 === 0.3); // false
 ```
 ES에서는 위와 같이 소수점 계산에서 고질적인 문제를 안고 있다.  
-이는 아마 [ES에서 쓰이는 엔진의 문제](http://speakingjs.com/es5/ch11.html#rounding_errors)라고 보여진다.  
-[decimal64 floating-point format](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
-> JavaScript’s numbers are usually entered as decimal floating-point numbers,
+이는 아마 [IEEE에서 제정한 부동소수점 표현 형식인 IEE754의 고질적인 문제](https://ko.wikipedia.org/wiki/IEEE_754)라고 보여진다.  
+[실수 표현 문제 발생 이유 or 오차 발생 이유](http://karmainearth.tistory.com/143)
+> 자바스크립트의 숫자는 십진 부동 소수점 숫자로 접근하는데 반해  
+  그 내부 동작 원리는 이진 부동 소수점 숫자이기 때문에 오차가 발생한다.  
+> [원문 보기](http://speakingjs.com/es5/ch11.html#rounding_errors)
+JavaScript’s numbers are usually entered as decimal floating-point numbers,
 but they are internally represented as binary floating-point numbers.
 That leads to imprecision.
+
+위와 같은 문제는 IEE754를 사용하는 Java에서도 동일하게 발생한다.
+```java
+public class test {
+    public static void main(String[] args) {
+        System.out.println(0.1 + 0.2);      // 0.30000000000000004
+        System.out.println(0.3 == 0.1+0.2); // false
+    }
+}
+```
 
 어찌보면 0.00000000000000004 정도의 오차는 무시되도 되는 작은 숫자이다.  
 
@@ -199,6 +234,19 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.1)); // true
 console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 ```
 
+##### Polyfill
+```javascript
+if(!Number.EPSILON) {
+  if(!Object.create) { // in ES3
+    Number.EPSILON = 2.220446049250313e-16;
+  } else { // in ES5
+    Object.defineProperty(Number, "EPSILON", {
+      value: 2.220446049250313e-16
+    });
+  }
+}
+```
+
 #### [Number.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/prototype)
 숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
 표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다.
@@ -224,7 +272,6 @@ console.log(12.0.lastNum()); // 2
 * [Number.prototype.toLocaleString()](#numberprototypetolocalestring)
 
 메소드는 수정 가능하다.  
-수정 가능하기 때문에 폴리필도 제작 가능하다.
 ```javascript
 Number.isFinite = () => "a";
 console.log(Number.isFinite(123)); // "a"
@@ -564,17 +611,16 @@ console.dir(objNum);
 ```
 ![Number Constructor Structure](imgs/number-constructor.png)
 
-#### [[Prototype]]
+#### \_\_proto\_\_
 ```javascript
 const objNum = new Number(11);
-console.log(objNum.__proto__ === Number.prototype); // true
+console.log(Number.prototype === objNum.__proto__); // true
 ```
 
 숫자의 래퍼 객체(Number)에서 미리 정의해놓은 프로퍼티(prototype)이다.  
 이 프로퍼티에는 숫자의 표준 메소드와 프로퍼티가 정의돼있다.  
-ECMAScript 명세서에 의하면 프로토타입 프로퍼티를 [[Prototype]]이라고 표현하고 있지만,  
-크롬에서는 \_\_proto\_\_ 라는 프로퍼티로 구현하였다.  
-숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체(Number)로부터 프로토타입 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
+숫자 객체의 인스턴스(new Number())는 숫자 래퍼 객체(Number)로부터  
+prototype 프로퍼티를 \_\_proto\_\_라는 이름으로 상속받는다. 
 
 #### Necessity
 [The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)  
@@ -606,7 +652,7 @@ const div = num1 / num2; // 1
 * Number.parseFloat(string)
 * new Number(string).valueOf()
 * Number()
-* +object, 1*object
+* +string, 1*string
 
 ### Number.parseInt(str[, radix])
 ```javascript
