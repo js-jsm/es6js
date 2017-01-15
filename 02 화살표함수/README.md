@@ -347,26 +347,3 @@ var chewToys = puppies.map(puppy => ({})); // ok
 })();
 ```
 > IIAF가 블록 본문을 가지고 있더라도 바인딩을 느슨하게하기 때문에 함수 호출이 불가능하기 때문에 괄호로 묶어야합니다.
-```js
-(function () {  // open IIFE
-    var tmp = ···;
-    // ···
-}());  // close IIFE
-console.log(tmp); // ReferenceError
-
-{  // open block
-    let tmp = ···;
-    ···
-}  // close block
-
-console.log(tmp); // ReferenceError
-
-const SENTENCE = 'How are you?';
-const REVERSED_SENTENCE = (() => {
-    // Iteration over the string gives us code points
-    // (better for reversal than characters)
-    const arr = [...SENTENCE];
-    arr.reverse();
-    return arr.join('');
-})();
-```
