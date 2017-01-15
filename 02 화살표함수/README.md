@@ -181,7 +181,7 @@ asyncFunc.catch(x => { throw x });
 > ```
 
 **화살표 함수의 특징**
-> ***his, super, arguments 및 new.target의 바인딩이 없다.***
+> ***this, super, arguments 및 new.target의 바인딩이 없다.***
 > - this, super, arguments 및 new.target은 함수를 감싸고 있는 가까운 화살표함수가 아닌 함수의 값이다. [(Lexical, 동적) 바인딩]
 >
 > ***prototype 프로퍼티가 없다.***
@@ -200,7 +200,7 @@ asyncFunc.catch(x => { throw x });
 > arguments 객체는 존재하지만 접근할 수 없다.
 >
 > ***중복된 이름의 파라미터를 가질 수 없다.***
->  - 화살표 함수는 엄격모드이거나 비엄격모드여도 중복된 이름의 파라미터를 가질 수 있지만, 일반 함수는 엄격모드의 경우에만 중복된 이름의 파라미터를 가질 수 없다.
+>  - 화살표 함수는 엄격모드이거나 비엄격모드여도 중복된 이름의 파라미터를 가질 수 없지만, 일반 함수는 엄격모드의 경우에만 중복된 이름의 파라미터를 가질 수 없다.
 
 **this**
 ```js
@@ -335,3 +335,39 @@ var chewToys = puppies.map(puppy => ({})); // ok
 ```
 혼란스럽게도 비어있는 객체 {}와 비어있는 블록 {}은 보기에 똑같습니다. ES6의 규칙에 따르면 화살표 바로 다음에 오는 { 기호는 언제나 블록의 시작으로 취급합니다. 객체의 시작으로 취급하는 일은 절대 없습니다. 그래서 puppy => {} 코드는 아무것도 하지 않고 undefined를 리턴하는 화살표 함수로 처리됩니다.
 더욱 혼란스러운 것은 {key: value} 같은 객체 리터럴이 라벨을 포함한 블록과 보기에 똑같다는 점입니다. 적어도 JavaScript 엔진에게는 똑같아 보입니다. 다행인 것은 모호한 기호가 { 하나뿐이라는 점입니다. 그래서 우리는 객체 리터럴을 괄호로 묶는다는 주의사항만 기억하면 됩니다.
+
+**Immediately Invoked Arrow Function (IIAF)**
+```js
+(function () { // open IIFE
+    // inside IIFE
+}()); // close IIFE
+
+(() => {
+    return 123
+})();
+```
+> IIAF가 블록 본문을 가지고 있더라도 바인딩을 느슨하게하기 때문에 함수 호출이 불가능하기 때문에 괄호로 묶어야합니다.
+```js
+(function () {  // open IIFE
+    var tmp = ···;
+    ···
+}());  // close IIFE
+
+console.log(tmp); // ReferenceError
+
+{  // open block
+    let tmp = ···;
+    ···
+}  // close block
+
+console.log(tmp); // ReferenceError
+
+const SENTENCE = 'How are you?';
+const REVERSED_SENTENCE = (() => {
+    // Iteration over the string gives us code points
+    // (better for reversal than characters)
+    const arr = [...SENTENCE];
+    arr.reverse();
+    return arr.join('');
+})();
+```
