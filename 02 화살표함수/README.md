@@ -354,7 +354,8 @@ var chewToys = puppies.map(puppy => ({})); // ok
 }());  // close IIFE
 
 console.log(tmp); // ReferenceError
-
+```
+```js
 {  // open block
     let tmp = ···;
     ···
