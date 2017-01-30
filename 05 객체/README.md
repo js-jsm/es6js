@@ -165,11 +165,15 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 
 객체는 new Object(), Object.create() 또는 literal 표기법 (initializer 표기법)을 사용하여 초기화 할 수 있습니다.
 > new Object(), Object.create(), Object Literal
+[http://unikys.tistory.com/320]
 
 * ES5 & Object Initializer
 * ES6 & Object Initializer
 
 ...
+
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer]
+[http://www.benmvp.com/learning-es6-enhanced-object-literals/]
 
 
 - - -
@@ -205,7 +209,16 @@ console.log(Object.is(5, "5"));     // false
 종종 Object.is()는 일치 연산자(===)와 같은 역할을 합니다. 유일한 차이점은 + 0, -0이 동일하지 않은 것과 NaN가 NaN과 동일한 것으로 간주되는 것입니다. 그러나 동등 연산자와 일치 연사자의 사용을 완전히 중지 할 필요는 없습니다. 이러한 케이스가 코드에 미치는 영향에 따라 사용 여부를 선택하면 됩니다.
 
 
-### 5-3-2. Object.assign() 메소드 (이후 추가 예정)
+
+### 5-3-2. Object.setPrototypeOf() 메소드 (이후 추가 예정)
+
+> 구문 : *Object.setPrototypeOf(object, prototype)*
+
+...
+
+
+
+### 5-3-3. Object.assign() 메소드 (이후 추가 예정)
 
 Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
 
@@ -233,15 +246,6 @@ console.log(copy); // { a: 1 }
 (참고)
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign]
 [https://leanpub.com/understandinges6/read/]
-
-
-### 5-3-3. Object.setPrototypeOf() 메소드 (이후 추가 예정)
-
-> 구문 : *Object.setPrototypeOf(object, prototype)*
-
-...
-
-
 
 - - -
 
