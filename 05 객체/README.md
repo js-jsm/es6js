@@ -247,19 +247,203 @@ Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible]
 
 
+
 ### 5-3-3. Object.assign() 메소드
 
 Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
 
 > 구문 : *Object.assign(target, ...sources)*
 
+```js
+let x = {x: 12};
+let y = {y: 13, __proto__: x};
+let z = {z: 14, get b(){return 2;}, q: {}};
+
+Object.defineProperty(z, "z", {enumerable: false});
+
+let m = {};
+
+Object.assign(m,y,z);
+
+console.log(m.y);
+console.log(m.z);
+console.log(m.b);
+console.log(m.x);
+console.log(m.q == z.q);
+```
+
+Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트로 부터 타켓 오브젝트로 프로퍼티들을 복사하는데 사용됩니다. 그리고, 타겟 오브젝트가 반환될 것입니다.
 소스 프로퍼티와 동일한 프로퍼티의 키를 가진 타켓 오브젝트의 프로퍼티들은 소스 오브젝트의 프로퍼티로 덮어쓰기 될 것입니다.
+
+Object.assign() 메소드는 열거할 수 있는 소스 오브젝트의 프로퍼티들만 타켓 오브젝트로 복사합니다. 이 메소드는 소스 오브젝트 대상으로 게터를 호출하고, 타켓 오브젝트 대상으로 세터를 호출합니다.
+따라서, 소스 오브젝트의 프로퍼티를 그냥 단순히 복사하거나, 새로운 프로퍼티를 생성하는 것이 아니라, 타켓 오브젝트의 프로퍼티를 게터와 세터를 이용하여 할당할 수도 있습니다. 먄약, 병합되는 소스 오브젝트가 게터를 포함하고 있다면, 새로운 프로퍼티를 타겟의 프로토타입에 병합하는 것은 알맞지 않을 것입니다. 열거가능성을 포함한 프로퍼티를 프로토타입으로 복사하기 위해서는 Object.getOwnPropertyDescriptor()와  Object.defineProperty()을 사용하시기 바랍니다.
+
+String 과 Symbol 프로퍼티 둘 다 복사될 것입니다.
+
+프로퍼티가 쓰기불가능(non-writable) 등과 같이 만약 에러가 발생할 수 있는 상황에서는,  TypeError 가 발생하고 타겟 오브젝트에는 변화가 없을 것입니다.
+
+Object.assign() 메소드는 null 이나 undefined 는 반환하지 않으니 주의하세요.
+
+* _객체 복제하기_
 
 ```js
 var obj = { a: 1 };
 var copy = Object.assign({}, obj);
 console.log(copy); // { a: 1 }
 ```
+
+* _깊은 복제에 대한 주의사항_
+
+깊은 복제에 대해서는 대안적인 방법을 사용할 필요가 있습니다. 왜냐하면, Object,assign()는 타겟 오브젝트에 할당을 할 때, 프로퍼티의 참조를 복사하기 때문입니다.
+
+```js
+function test() {
+  let a = { b: {c:4} , d: { e: {f:1}} }
+  let g = Object.assign({},a)
+  let h = JSON.parse(JSON.stringify(a));
+  console.log(g.d) // { e: { f: 1 } }
+  g.d.e = 32
+  console.log('g.d.e set to 32.') // g.d.e set to 32.
+  console.log(g) // { b: { c: 4 }, d: { e: 32 } }
+  console.log(a) // { b: { c: 4 }, d: { e: 32 } }
+  console.log(h) // { b: { c: 4 }, d: { e: { f: 1 } } }
+  h.d.e = 54
+  console.log('h.d.e set to 54.') // h.d.e set to 54.
+  console.log(g) // { b: { c: 4 }, d: { e: 32 } }
+  console.log(a) // { b: { c: 4 }, d: { e: 32 } }
+  console.log(h) // { b: { c: 4 }, d: { e: 54 } }
+}
+test();
+```
+
+* _객체 병합하기_
+
+```js
+var o1 = { a: 1 };
+var o2 = { b: 2 };
+var o3 = { c: 3 };
+
+var obj = Object.assign(o1, o2, o3);
+console.log(obj); // { a: 1, b: 2, c: 3 }
+console.log(o1);  // { a: 1, b: 2, c: 3 }, 타겟 오브젝트, 그 자체도 변화합니다.
+```
+
+* _같은 프로퍼티를 가지고 있는 객체 병합하기_
+
+```js
+var o1 = { a: 1, b: 1, c: 1 };
+var o2 = { b: 2, c: 2 };
+var o3 = { c: 3 };
+
+var obj = Object.assign({}, o1, o2, o3);
+console.log(obj); // { a: 1, b: 2, c: 3 }
+```
+
+다른 오브젝트가 가지고 있는 똑같은 프로퍼티들은 인수의 순서에 따라 덮어 씌여질 것입니다.
+
+
+* _심볼 타입 프로퍼티 복사하기_
+
+```js
+var o1 = { a: 1 };
+var o2 = { [Symbol('foo')]: 2 };
+
+var obj = Object.assign({}, o1, o2);
+console.log(obj); // { a : 1, [Symbol("foo")]: 2 } (cf. bug 1207182 on Firefox)
+Object.getOwnPropertySymbols(obj); // [Symbol(foo)]
+```
+
+* _프로토타입 체인 위에 있는 프로퍼티와 열거할 수 없는 프로퍼티들은 복사되지 않습니다_
+
+```js
+var obj = Object.create({ foo: 1 }, { // foo는 변수 obj의 프로토타입 체인 위에 있습니다.
+  bar: {
+    value: 2  // 변수 bar는 non-enumerable 프로퍼티입니다. 따라서 복사되지 않을 것입니다.
+  },
+  baz: {
+    value: 3,
+    enumerable: true  // 변수 baz는 그 자체도 enumerable 프로퍼티입니다. 따라서 복사될 것입니다.
+  }
+});
+
+var copy = Object.assign({}, obj);
+console.log(copy); // { baz: 3 }
+```
+
+* _원시 타입들은 객체로 변환될 것입니다_
+
+```js
+var v1 = 'abc';
+var v2 = true;
+var v3 = 10;
+var v4 = Symbol('foo');
+
+var obj = Object.assign({}, v1, null, v2, undefined, v3, v4); 
+// null과 undefined는 무시될 것입니다.
+// String warpper만이 enumerable 프로퍼티를 가지고 있음을 주의하세요.
+console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+```
+
+* _예외는 진행중인 복사 작업을 중지시킬 것입니다_
+
+```js
+var target = Object.defineProperty({}, 'foo', {
+  value: 1,
+  writable: false
+}); // target.foo is a read-only property
+
+Object.assign(target, { bar: 2 }, { foo2: 3, foo: 3, foo3: 3 }, { baz: 4 });
+// TypeError: "foo" is read-only
+// The Exception is thrown when assigning target.foo
+
+console.log(target.bar);  // 2, 첫 번째 소스 오브젝트는 성공적으로 복사되었습니다.
+console.log(target.foo2); // 3, 두 번째 소스 프로젝트의 첫 번째 프로퍼티도 성공적으로 복사되었습니다.
+console.log(target.foo);  // 1, 예외는 여기서 던져집니다.
+console.log(target.foo3); // undefined, Object.assign() 메소드는 끝났습니다. 변수 foo3는 복사되지 않습니다.
+console.log(target.baz);  // undefined, 세 번째 소스 오브젝트, 역시 복사되지 않습니다.
+```
+
+
+* _복사 접근자들_
+
+```js
+var obj = {
+  foo: 1,
+  get bar() {
+    return 2;
+  }
+};
+
+var copy = Object.assign({}, obj); 
+console.log(copy); 
+// { foo: 1, bar: 2 }, copy.bar의 값은 obj.bar'의 게터가 리턴해주는 값입니다.
+
+// 이것은 모든 descriptors를 복사하는 할당 함수입니다.
+function completeAssign(target, ...sources) {
+  sources.forEach(source => {
+    let descriptors = Object.keys(source).reduce((descriptors, key) => {
+      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
+      return descriptors;
+    }, {});
+    // 기본적으로, Object.assign는 열거할 수 있는 Symbol도 복사합니다.
+    Object.getOwnPropertySymbols(source).forEach(sym => {
+      let descriptor = Object.getOwnPropertyDescriptor(source, sym);
+      if (descriptor.enumerable) {
+        descriptors[sym] = descriptor;
+      }
+    });
+    Object.defineProperties(target, descriptors);
+  });
+  return target;
+}
+
+var copy = completeAssign({}, obj);
+console.log(copy);
+// { foo:1, get bar() { return 2 } }
+```
+
+
+
 
 * 유의사항
 
@@ -270,13 +454,10 @@ console.log(copy); // { a: 1 }
 - 소스의 프로퍼티 정의부는 복사되지 않으므로 필요 시 Object.getOwnPropertyDescriptor(), Object.defineProperty()를 대신 사용합니다.
 - null 또는 undefined의 값인 키는 반환하지 않습니다.
 
-...
-
 (참고)
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign]
 [https://leanpub.com/understandinges6/read/]
 
-- - -
 
 
 ## 5-4. Etc
