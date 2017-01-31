@@ -210,15 +210,44 @@ console.log(Object.is(5, "5"));     // false
 
 
 
-### 5-3-2. Object.setPrototypeOf() 메소드 (이후 추가 예정)
+### 5-3-2. Object.setPrototypeOf() 메소드
 
 > 구문 : *Object.setPrototypeOf(object, prototype)*
 
-...
+객체 [[Prototype]] 프로퍼티 값을 할당하는 메소드입니다.
+
+```js
+let x = {x: 12};
+let y = {y: 13};
+
+Object.setPrototypeOf(y,x);
+
+console.log(y.x); // "12"
+console.log(y.y); // "13"
+```
+
+[[Prototype]]이 수정 될 객체가 Object.isExtensible()에 따라 확장 불가능한 경우 TypeError 에러를 발생시킵니다. 
+프로토 타입 매개 변수가 객체 또는 null이 아닌 경우 (즉, number/string/boolean/undefined) 아무 것도 하지 않습니다. 
+그렇지 않은 경우,이 메소드는 obj의 [[Prototype]]을 새로운 값으로 변경합니다.
+
+논쟁의 여지가 많은 Object.prototype.`__ proto__` 속성과 비교하여 일반적으로 객체의 프로토 타입을 설정하는 적절한 방법으로 간주됩니다.
+Chrome 및 FireFox에서만 작동하며 IE에서는 작동하지 않습니다.
+Object.setPrototypeOf를 아직 사용할 수 없다면, Object.prototype.`__ proto__` 속성을 사용하면 쉽게 정의 할 수 있습니다.
+
+```js
+Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
+  obj.__proto__ = proto;
+  return obj; 
+}
+```
 
 
+(참고)
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf]
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible]
 
-### 5-3-3. Object.assign() 메소드 (이후 추가 예정)
+
+### 5-3-3. Object.assign() 메소드
 
 Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
 
