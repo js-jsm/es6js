@@ -215,6 +215,7 @@ console.log(Object.is(5, "5"));     // false
 > 구문 : *Object.setPrototypeOf(object, prototype)*
 
 객체 [[Prototype]] 프로퍼티 값을 할당하는 메소드입니다.
+기존의 constructor를 덮어씌운다.
 
 ```js
 let x = {a: 12};
