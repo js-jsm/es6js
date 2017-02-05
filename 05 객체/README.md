@@ -394,55 +394,6 @@ var target = Object.defineProperty({}, 'foo', {
 
 Object.assign(target, { bar: 2 }, { foo2: 3, foo: 3, foo3: 3 }, { baz: 4 });
 // TypeError: "foo" is read-only
-// The Exception is thrown when assigning target.foo
-
-console.log(target.bar);  // 2, 첫 번째 소스 오브젝트는 성공적으로 복사되었습니다.
-console.log(target.foo2); // 3, 두 번째 소스 프로젝트의 첫 번째 프로퍼티도 성공적으로 복사되었습니다.
-console.log(target.foo);  // 1, 예외는 여기서 던져집니다.
-console.log(target.foo3); // undefined, Object.assign() 메소드는 끝났습니다. 변수 foo3는 복사되지 않습니다.
-console.log(target.baz);  // undefined, 세 번째 소스 오브젝트, 역시 복사되지 않습니다.
-```
-
-
-* _복사 접근자들_
-
-```js
-var obj = {
-  foo: 1,
-  get bar() {
-    return 2;
-  }
-};
-
-var copy = Object.assign({}, obj); 
-console.log(copy); 
-// { foo: 1, bar: 2 }, copy.bar의 값은 obj.bar'의 게터가 리턴해주는 값입니다.
-
-// 이것은 모든 descriptors를 복사하는 할당 함수입니다.
-function completeAssign(target, ...sources) {
-  sources.forEach(source => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key);
-      return descriptors;
-    }, {});
-    // 기본적으로, Object.assign는 열거할 수 있는 Symbol도 복사합니다.
-    Object.getOwnPropertySymbols(source).forEach(sym => {
-      let descriptor = Object.getOwnPropertyDescriptor(source, sym);
-      if (descriptor.enumerable) {
-        descriptors[sym] = descriptor;
-      }
-    });
-    Object.defineProperties(target, descriptors);
-  });
-  return target;
-}
-
-var copy = completeAssign({}, obj);
-console.log(copy);
-// { foo:1, get bar() { return 2 } }
-```
-
-
 
 
 * 유의사항
