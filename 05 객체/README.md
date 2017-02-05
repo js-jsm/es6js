@@ -222,8 +222,8 @@ let y = {y: 13};
 
 Object.setPrototypeOf(y,x);
 
-console.log(y.x); // "12"
-console.log(y.y); // "13"
+console.log(y.x); // 12
+console.log(y.y); // 13
 ```
 
 [[Prototype]]이 수정 될 객체가 Object.isExtensible()에 따라 확장 불가능한 경우 TypeError 에러를 발생시킵니다. 
@@ -265,11 +265,11 @@ let m = {};
 
 Object.assign(m,y,z);
 
-console.log(m.y);
-console.log(m.z);
-console.log(m.b);
-console.log(m.x);
-console.log(m.q == z.q);
+console.log(m.y); // 13
+console.log(m.z); // undefined
+console.log(m.b); // 2
+console.log(m.x); // undefined
+console.log(m.q == z.q); // true
 ```
 
 Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트로 부터 타켓 오브젝트로 프로퍼티들을 복사하는데 사용됩니다. 그리고, 타겟 오브젝트가 반환될 것입니다.
