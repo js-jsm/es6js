@@ -297,12 +297,10 @@ console.log(copy); // { a: 1 }
 
 유의사항
 
-- 소스의 getter, 타깃의 setter를 호출합니다.
 - 소스 프로퍼티 값을 타깃 객체의 새로운 또는 이미 존재하는 프로퍼티에 할당하는 기능이 전부 입니다.
 - 소스의 [[prototype]] 프로퍼티는 복사하지 않습니다(얕은복사).
 - 자바스크립트에서 프로퍼티명은 문자열 아니면 심볼인데 Object.assign()은 둘 다 복사합니다.
 - 소스의 프로퍼티 정의부는 복사되지 않으므로 필요 시 Object.getOwnPropertyDescriptor(), Object.defineProperty()를 대신 사용합니다.
-- null 또는 undefined의 값인 키는 반환하지 않습니다.
 
 (참고)
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign]
