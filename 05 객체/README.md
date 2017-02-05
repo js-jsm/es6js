@@ -316,43 +316,6 @@ function test() {
 test();
 ```
 
-* _객체 병합하기_
-
-```js
-var o1 = { a: 1 };
-var o2 = { b: 2 };
-var o3 = { c: 3 };
-
-var obj = Object.assign(o1, o2, o3);
-console.log(obj); // { a: 1, b: 2, c: 3 }
-console.log(o1);  // { a: 1, b: 2, c: 3 }, 타겟 오브젝트, 그 자체도 변화합니다.
-```
-
-* _같은 프로퍼티를 가지고 있는 객체 병합하기_
-
-```js
-var o1 = { a: 1, b: 1, c: 1 };
-var o2 = { b: 2, c: 2 };
-var o3 = { c: 3 };
-
-var obj = Object.assign({}, o1, o2, o3);
-console.log(obj); // { a: 1, b: 2, c: 3 }
-```
-
-다른 오브젝트가 가지고 있는 똑같은 프로퍼티들은 인수의 순서에 따라 덮어 씌여질 것입니다.
-
-
-* _심볼 타입 프로퍼티 복사하기_
-
-```js
-var o1 = { a: 1 };
-var o2 = { [Symbol('foo')]: 2 };
-
-var obj = Object.assign({}, o1, o2);
-console.log(obj); // { a : 1, [Symbol("foo")]: 2 } (cf. bug 1207182 on Firefox)
-Object.getOwnPropertySymbols(obj); // [Symbol(foo)]
-```
-
 * _프로토타입 체인 위에 있는 프로퍼티와 열거할 수 없는 프로퍼티들은 복사되지 않습니다_
 
 ```js
