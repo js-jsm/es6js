@@ -143,24 +143,39 @@ triggerListeners(obj);
 <br>
 ### 위크맵을 통해 프라이빗 데이터 보존하기
 
-다음 코드에서 위크맵인 _counter와 _action는 Countdown의 인스턴스인 가상 프로퍼티의 값을 저장하는 데에 이용된다.
+아래 예제의 접근법은 생성자 함수에 private 데이터를 제공하게 해준다. ‘let age’는 블록스코프를 가지고 외부에서 접근할 수 없는 값이다.
 ```js
-const _counter = new WeakMap();
-const _action = new WeakMap();
-class Countdown {
-    constructor(counter, action) {
-        _counter.set(this, counter);
-        _action.set(this, action);
-    }
-    dec() {
-        let counter = _counter.get(this);
-        if (counter < 1) return;
-        counter--;
-        _counter.set(this, counter);
-        if (counter === 0) {
-            _action.get(this)();
-        }
-    }
+function Person(name) {
+  let age = 20; // this is private
+  this.name = name; // this is public
+  this.greet = function () {
+    // here we can access both name and age
+    console.log(`name: ${this.name}, age: ${age}`);
+  };
 }
-```
+let joe = new Person('Joe');
+joe.greet();
 
+```
+하지만, 이경우 모든 Person인스턴스는 age를 생성하게 되고, 메모리를 낭비하는 결과를 초래한다.
+
+WeakMap을 사용하면 이러한 메모리 낭비를 막고 성능을 개선할 수 있다. let을 이용해 private한 WeakMap을 만들고, 이 WeakMap을 이용해 this와 연관된 private데이터를 조회할 수 있다. 이렇게 하면 모든 인스턴스가 하나의 WeakMap을 공유하게 된다.
+
+```js
+let Person = (function () {
+  let privateProps = new WeakMap();
+  class Person {
+    constructor(name) {
+      this.name = name; // this is public
+      privateProps.set(this, {age: 20}); // this is private
+    }
+    greet() {
+      // Here we can access both name and age
+      console.log(`name: ${this.name}, age: ${privateProps.get(this).age}`);
+    }
+  }
+  return Person;
+})();
+let joe = new Person('Joe');
+joe.greet();
+```
