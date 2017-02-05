@@ -250,9 +250,9 @@ Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
 
 ### 5-3-3. Object.assign() 메소드
 
-Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
-
 > 구문 : *Object.assign(target, ...sources)*
+
+Object.assign() 메소드는 열거할 수 있는 하나 이상의 소스 오브젝트에서 모든 열거 가능한 자기 프로퍼티들을 타깃 객체로 복사하고 이 타깃 객체를 반환합니다.
 
 ```js
 let x = {x: 12};
