@@ -217,13 +217,13 @@ console.log(Object.is(5, "5"));     // false
 객체 [[Prototype]] 프로퍼티 값을 할당하는 메소드입니다.
 
 ```js
-let x = {x: 12};
-let y = {y: 13};
+let x = {a: 12};
+let y = {b: 13};
 
 Object.setPrototypeOf(y,x);
 
-console.log(y.x); // 12
-console.log(y.y); // 13
+console.log(y.a); // 12
+console.log(y.b); // 13
 ```
 
 [[Prototype]]이 수정 될 객체가 Object.isExtensible()에 따라 확장 불가능한 경우 TypeError 에러를 발생시킵니다. 
