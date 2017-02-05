@@ -292,6 +292,8 @@ var copy = Object.assign({}, obj);
 console.log(copy); // { a: 1 }
 ```
 
+
+
 * 유의사항
 
 - 소스의 getter, 타깃의 setter를 호출합니다.
