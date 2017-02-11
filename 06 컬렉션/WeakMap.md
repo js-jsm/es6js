@@ -10,8 +10,7 @@ Map과 동일하게 WeakMap 객체의 생성은 `new`연산자를 통해서 객�
 ```js
 new WeakMap([iterable])
 ```
-크롬 브라우저에서의 `WeakMap` 출력 결과의 모습<br>
-![WeakMap Object](./weakmap_console.png)
+
 <br>
 
 ## 6-2-2. WeakMap의 키는 객체
@@ -24,6 +23,8 @@ const wm = new WeakMap()
 wm.set('abc', 123); // TypeError
 wm.set({}, 123); // ok
 ```
+크롬 브라우저에서의 `WeakMap` 출력 결과의 모습<br>
+![WeakMap Object](./weakmap_console.png)
 <br>
 
 ## 6-2-3. WeakMap의 키는 약하게 연결되어 있다.
