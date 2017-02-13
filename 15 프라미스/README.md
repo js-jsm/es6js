@@ -80,7 +80,7 @@ promiseFunc(1)
 });
 ```
 
-그런데 프라미스의 `then` 메소드는 언제나 프라미스를 반환한다. 심지어 return이 없을 경우에는 undefined가 담긴 프라미스를 반환한다. 이를 이용하면 위와 같이 depth가 무한정 깊어지는 _콜백지옥_ 형태를 피하고 flat한 구문을 유지할 수 있다.
+그런데 프라미스의 `then` 메소드는 언제나 프라미스를 반환한다. return한 값이 `[[PromiseValue]]`라는 프로퍼티에 담겨 전달되는 것이다. 심지어 return이 없을 경우에는 undefined가 담긴 프라미스를 반환한다. 이를 이용하면 위와 같이 depth가 무한정 깊어지는 _콜백지옥_ 형태를 피하고 flat한 구문을 유지할 수 있다.
 
 ```js
 const promiseFunc = param => new Promise((resolve, reject) => {
@@ -105,11 +105,179 @@ promiseFunc(1)                    // promiseFunc 호출 [1]
 });
 ```
 
-`P` 프라미스에 then메소드를 호출한 결과를 새로운 프라미스 `Q`라 하자.
+뿐만 아니라 ajax통신 등에서 json을 파싱하는 작업을 _자연스러운 흐름에 따라_ 기술할 수 있어, 코드 가독성이 높아지는 이익도 얻을 수 있다.
 
-```
-P.then(onFulfilled, onRejected);
+```js
+fetch(url)
+.then(res => JSON.parse(res))
+.then(data => {
+	// 파싱된 데이터 사용
+});
 ```
 
-여기서 `Q`는 `onFulfilled` 혹은 `onRejected` 메소드에서 반환(return)된 값이 있을 경우 해당 값으로 resolve 된다.
-한편 `onFulfilled` 혹은 `onRejected`에서 예외를 던질 경우에는 reject 된다.
+위 내용의 일부를 미리 함수화해둔다면 반복을 상당히 줄일 수 있을 것이다.
+
+```js
+const getJSON = url => fetch(url).then(res => JSON.parse(res));
+
+getJSON(url).then(data => {
+	// 파싱된 데이터 사용
+});
+```
+
+
+## 15-4. 에러 핸들링
+
+
+프라미스 체이닝을 이용하면 단계별로 그룹화하여 에러핸들링을 처리할 수 있다.
+
+```js
+asyncThing1()
+.then(()=> asyncThing2)
+.then(()=> asyncThing3)
+.catch(err => asyncRecovery1)
+.then(
+	()=> asyncThing4,
+	err => asyncRecovery2
+)
+.catch(err => { console.log("Don't worry about it"); })
+.then(() => { console.log("All done!"); });
+```
+
+[![Promise Chaining](./promise_chaining.png)](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+_파란선 : resolved // 빨간선 : reject_
+
+
+`catch` 메소드는 명시적으로 reject한 경우뿐이 아니라, resolve할 대상 인자의 error에 대해서도 호출된다.
+
+```js
+new Promise((resolve, reject) => { reject('error!'); })
+.then(res => {
+	console.log(res); // 호출안됨
+})
+.catch(err => {
+	console.error(err);
+});
+
+new Promise((resolve, reject) => { resolve(JSON.parse('')); })
+.then(res => {
+	console.log(res); // 호출안됨
+})
+.catch(err => {
+	console.error(err);
+});
+```
+
+
+
+## 15-5. 부분 또는 전체
+
+### 15-5-1. `Promise.all(array of Promises)`
+
+배열의 모든 요소가 fulfilled되면 마지막으로 fulfilled된 이후 then 구문을 진행한다. 반면 하나라도 rejected된다면 그 즉시 catch 구문이 진행된다.
+
+배열의 각 요소는 `Promise.resolve`를 통과하므로, 반드시 프라미스로 이루어져 있어야할 필요는 없다.
+
+fulfill시 then 구문으로 넘어오는 값은 각 요소의 fulfilled된 값으로 이루어진 배열이며, 원본 배열의 순서를 그대로 따른다. 한편 rejected된 경우 catch 구문으로 넘어오는 값은 처음 rejected된 값이다.
+
+```js
+const arr = [
+	1,
+	new Promise((resolve, reject) => {
+		setTimeout(()=> {
+			resolve('1000ms');
+		}, 1000);
+	}),
+	'abc',
+	()=> 'not called function',
+	(()=> 'IIFE')()
+];
+
+Promise.all(arr)
+.then(res => { console.log(res); })
+.catch(err => { console.error(err); });
+
+// [1, "1000ms", "abc", function, "IIFE"]
+```
+
+```js
+const arr = [
+	1,
+	new Promise((resolve, reject) => {
+		setTimeout(()=> {
+			reject('rejected after 1000ms');
+		}, 1000);
+	}),
+	'abc',
+	()=> 'not called function',
+	(()=> 'IIFE')()
+];
+
+Promise.all(arr)
+.then(res => { console.log(res); })
+.catch(err => { console.error(err); });
+
+// rejected after 1000ms
+```
+
+
+
+### 15-5-2. `Promise.race(array o Promises)`
+
+배열의 요소들 중 가장 먼저 fulfill되거나 reject되는 요소를 즉시 then 또는 catch구문의 값으로 전달한다. 마찬가지로 배열의 각 요소는 반드시 프라미스일 필요는 없다.
+
+```js
+const arr = [
+	new Promise(resolve => {
+		setTimeout(()=> { resolve('1번요소, 1000ms'); }, 1000);
+	}),
+	new Promise(resolve => {
+		setTimeout(()=> { resolve('2번요소, 500ms'); }, 500);
+	}),
+	new Promise(resolve => {
+		setTimeout(()=> { resolve('3번요소, 750ms'); }, 750);
+	})
+];
+Promise.race(arr)
+.then(res => { console.log(res); })
+.catch(err => { console.error(err); });
+
+// 2번요소, 500ms
+```
+
+```js
+const arr = [
+	new Promise(resolve => {
+		setTimeout(()=> { resolve('1번요소, 0ms'); }, 0);
+	}),
+	'no queue'
+];
+Promise.race(arr)
+.then(res => { console.log(res); })
+.catch(err => { console.error(err); });
+
+// no queue
+```
+
+```js
+const arr = [
+	new Promise(resolve => {
+		setTimeout(()=> { resolve('1번요소, 0ms'); }, 0);
+	}),
+	Promise.reject('reject!')
+];
+Promise.race(arr)
+.then(res => { console.log(res); })
+.catch(err => { console.error(err); });
+
+// reject!
+```
+
+Method | Description
+---|---
+Promise.resolve(promise) | promise를 반환한다 (promise.constructor === Promise인 경우에만).
+Promise.resolve(thenable) | thenable로부터 새로운 promise를 생성한다.
+Promise.resolve(obj) | obj를 fulfill하는 promise를 생성한다.
+Promise.reject(obj) | obj를 reject하는 promise를 생성한다. **obj는 Error의 인스턴스여야만 한다.**
+Promise.all(array) | 배열 각 요소가 모두 fulfill되면 then을, 하나라도 reject되면 catch를 따른다.
+Promise.race(array) | 배열 요소들 중 가장 먼저 fulfill 또는 reject되는 대상의 promise를 진행한다.
