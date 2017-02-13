@@ -145,6 +145,7 @@ asyncThing1()
 ```
 
 [![Promise Chaining](./promise_chaining.png)](https://developers.google.com/web/fundamentals/getting-started/primers/promises)
+
 _파란선 : resolved // 빨간선 : reject_
 
 
