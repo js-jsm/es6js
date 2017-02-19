@@ -326,16 +326,16 @@ console.log(config); // { size: 12, mobileSize: 4 }
 var obj1 = {};
 assert(Object.getPrototypeOf(obj1) === Object.prototype);
 
-var obj2 = { `__proto__`: null };
+var obj2 = { __proto__: null };
 assert(Object.getPrototypeOf(obj2) === null);
 
 var protoObj = {};
-var obj3 = { "`__proto__`": protoObj };
+var obj3 = { "__proto__": protoObj };
 assert(Object.getPrototypeOf(obj3) === protoObj);
 
-var obj4 = { `__proto__`: "not an object or null" };
+var obj4 = { __proto__: "not an object or null" };
 assert(Object.getPrototypeOf(obj4) === Object.prototype);
-assert(!obj4.hasOwnProperty("`__proto__`"));
+assert(!obj4.hasOwnProperty("__proto__"));
 ```
 
 단일 프로토타입 변이(mutation)만 객체 리터럴에 허용됩니다: 다중 프로토타입 변이는 구문 오류입니다.
