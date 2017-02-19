@@ -254,23 +254,6 @@ var a = {x: 1, x: 2};
 console.log(a); // {x: 2}
 ```
 
-ECMAScript 5 엄격 모드 코드에서 중복 속성 이름은 SyntaxError로 간주됩니다. ECMAScript 2015는 런타임에 중복을 가능하게하는 계산 된 속성 이름을 도입함으로써이 제한을 제거했습니다.
-
-```js
-function haveES6DuplicatePropertySemantics(){
-  "use strict";
-  try {
-    ({ prop: 1, prop: 2 });
-
-    // 오류 미 발생, 중복 속성명은 엄격 모드에서 허용됨
-    return true;
-  } catch (e) {
-    // 오류 발생, 중복은 엄격 모드에서 금지됨
-    return false;
-  }
-}
-```
-
 ### 5-2-2. 메서드 정의
 
 ECMAScript 2015에서는 단축 표기법을 이용하여, "function" 키워드를 사용하지 않고 표기가 가능해졌습니다.
