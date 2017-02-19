@@ -161,22 +161,205 @@ fred는 Employee.prototype 대신 Cow.prototype를 상속하게 되며, Employee
 - - -
 
 
-## 5-2. 객체 초기자(Object initializer) (이후 추가 예정)
+## 5-2. 객체 초기자(Object initializer)
 
-객체는 new Object(), Object.create() 또는 literal 표기법 (initializer 표기법)을 사용하여 초기화 할 수 있습니다.
-> new Object(), Object.create(), Object Literal
-[http://unikys.tistory.com/320]
+객체는 new Object(), Object.create() 또는 literal 표기법 (initializer 표기법)을 사용하여 초기화 할 수 있습니다. 객체 초기자는 중괄호 ({})로 묶인 객체의 0개 이상의 속성 이름 및 관련 값의 쉼표로 구분 된 목록입니다.
 
-* ES5 & Object Initializer
-* ES6 & Object Initializer
+```js
+var o = {};
+var o = { a: "foo", b: 42, c: {} };
 
-...
+var a = "foo", b = 42, c = {};
+var o = { a: a, b: b, c: c };
+
+var o = {
+  property: function ([parameters]) {},
+  get property() {},
+  set property(value) {},
+};
+```
+
+ECMAScript 2015에서는 새로운 표기법으로 아래와 같은 표기법으로 사용할 수 있습니다.
+
+```js
+// 단축 속성명 (ES6)
+var a = "foo", b = 42, c = {};
+var o = { a, b, c };
+
+// 단축 메서드명 (ES6)
+var o = {
+  property([parameters]) {},
+  get property() {},
+  set property(value) {},
+  * generator() {}
+};
+
+// 속성 계산명 (ES6)
+var prop = "foo";
+var o = {
+  [prop]: "hey",
+  ["b" + "ar"]: "there",
+};
+```
+
+객체 초기화는 객체의 초기화를 설명하는 표현식입니다. 객체는 객체를 설명하는 데 사용되는 속성으로 구성됩니다. 객체 프로퍼티의 값은 아래와 같이 기본 데이터 유형 또는 다른 객체를 포함 할 수 있습니다.
+
+
+### 5-2-1. 객체 초기화 설명
+
+> 객체 생성
+
+```js
+var object = {
+  foo: "bar",
+  age: 42,
+  baz: { myProp: 12 },
+}
+```
+
+> 속성 접근
+
+```js
+object.foo; // "bar"
+object["age"]; // 42
+
+object.foo = "baz";
+```
+
+> 속성 정의
+
+```js
+var a = "foo",
+    b = 42,
+    c = {};
+    
+// (ES5)
+var o = {
+  a: a,
+  b: b,
+  c: c
+};
+
+// 단축 속성명 (ES6)
+var o = { a, b, c };
+```
+
+> 중복된 속성명
+
+ES5에서는 속성이 같은 이름을 쓰는 경우, 두 번째 속성은 첫 번째를 겹쳐씁니다.
+
+```js
+// ES5
+var a = {x: 1, x: 2};
+console.log(a); // {x: 2}
+```
+
+ECMAScript 5 엄격 모드 코드에서 중복 속성 이름은 SyntaxError로 간주됩니다. ECMAScript 2015는 런타임에 중복을 가능하게하는 계산 된 속성 이름을 도입함으로써이 제한을 제거했습니다.
+
+```js
+function haveES6DuplicatePropertySemantics(){
+  "use strict";
+  try {
+    ({ prop: 1, prop: 2 });
+
+    // 오류 미 발생, 중복 속성명은 엄격 모드에서 허용됨
+    return true;
+  } catch (e) {
+    // 오류 발생, 중복은 엄격 모드에서 금지됨
+    return false;
+  }
+}
+```
+
+### 5-2-2. 메서드 정의
+
+ECMAScript 2015에서는 단축 표기법을 이용하여, "function" 키워드를 사용하지 않고 표기가 가능해졌습니다.
+
+```js
+// ES5
+var o = {
+  property: function ([parameters]) {},
+  get property() {},
+  set property(value) {},
+};
+
+// 단축 메서드 명 (ES6)
+var o = {
+  property([parameters]) {},
+  get property() {},
+  set property(value) {},
+  * generator() {}
+};
+```
+
+### 5-2-3. 속성 계산명
+
+ECMAScript 2015부터는 객체 초기자 구문은 계산 된 속성 명을 지원합니다. 이를 통해 대괄호('[]')에 표현식을 넣을 수 있습니다.이 표현식은 속성 이름으로 계산됩니다. 이는 속성 접근자 구문의 대괄호 표기법과 대칭입니다. 이 속성 표기법을 사용하면 속성을 이미 읽고 설정했을 수 있습니다. 이제는 객체 리터럴에서도 동일한 구문을 사용할 수 있습니다.
+
+```js
+// 속성 계산명 (ES6)
+var i = 0;
+var a = {
+  ["foo" + ++i]: i,
+  ["foo" + ++i]: i,
+  ["foo" + ++i]: i
+};
+
+console.log(a.foo1); // 1
+console.log(a.foo2); // 2
+console.log(a.foo3); // 3
+
+var param = 'size';
+var config = {
+  [param]: 12,
+  ["mobile" + param.charAt(0).toUpperCase() + param.slice(1)]: 4
+};
+
+console.log(config); // { size: 12, mobileSize: 4 }
+```
+
+### 5-2-4. 프로토타입 변이
+
+__proto__: value 또는 "__proto__": value 형태의 속성 정의는 이름이 __proto__인 속성을 만들지 않습니다. 대신, 제공된 값이 객체 또는 null이면, 생성된 객체의 [[Prototype]]을 그 값으로 바꿉니다. (값이 객체나 null이 아니면, 객체는 바뀌지 않습니다.)
+
+```js
+var obj1 = {};
+assert(Object.getPrototypeOf(obj1) === Object.prototype);
+
+var obj2 = { __proto__: null };
+assert(Object.getPrototypeOf(obj2) === null);
+
+var protoObj = {};
+var obj3 = { "__proto__": protoObj };
+assert(Object.getPrototypeOf(obj3) === protoObj);
+
+var obj4 = { __proto__: "not an object or null" };
+assert(Object.getPrototypeOf(obj4) === Object.prototype);
+assert(!obj4.hasOwnProperty("__proto__"));
+```
+
+단일 프로토타입 변이(mutation)만 객체 리터럴에 허용됩니다: 다중 프로토타입 변이는 구문 오류입니다.
+
+"colon" 표기법을 쓰지 않는 속성 정의는 프로토타입 변이가 아닙니다: 그들은 다른 이름을 사용하는 비슷한 정의와 동일하게 동작하는 속성 정의입니다.
+
+```js
+var __proto__ = "variable";
+
+var obj1 = { __proto__ };
+assert(Object.getPrototypeOf(obj1) === Object.prototype);
+assert(obj1.hasOwnProperty("__proto__"));
+assert(obj1.__proto__ === "variable");
+
+var obj2 = { __proto__() { return "hello"; } };
+assert(obj2.__proto__() === "hello");
+
+var obj3 = { ["__prot" + "o__"]: 17 };
+assert(obj3.__proto__ === 17);
+```
 
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer]
-[http://www.benmvp.com/learning-es6-enhanced-object-literals/]
 
 
-- - -
 
 
 ## 5-3. 추가된 메소드 
